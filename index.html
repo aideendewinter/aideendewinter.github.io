@@ -15,7 +15,7 @@
         prices.forEach(removeNoDemand);
         prices.forEach(calculateSpread);
         prices.sort(comparePrices);
-        $("p").text(prices[0]);
+        $("p").text(prices[0].id + " - " + prices[0].spread);
       }
     };
     xmlhttp.open("GET", url + 0, true);
