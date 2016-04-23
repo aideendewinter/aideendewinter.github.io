@@ -1,10 +1,39 @@
 <!DOCTYPE html>
 <html lang="en-US">
-<title>Jess Whitworth's Page of Random Awesome</title>
-<meta name="description" content="Randomly awesome things I randomly decided to make.">
-<meta name="author" content="Jess Whitworth">
-<meta charset="UTF-8">
-<body>
-<h1>Jess Whitworth's Page of Random Awesome</h1>
-</body>
+  <title>Jess Whitworth's Page of Random Awesome</title>
+  <meta name="description" content="Randomly awesome things I randomly decided to make.">
+  <meta name="author" content="Jess Whitworth">
+  <meta charset="UTF-8">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script>
+    var xmlhttp = new XMLHttpRequest();
+    var url = "/v2/commerce/prices?page_size=200&page=";
+    
+    xmlhttp.onreadystatechange = function() {
+      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        var prices = JSON.parse(xmlhttp.responseText);
+        prices.forEach(removeNoDemand);
+        prices.forEach(calculateSpread);
+        prices.sort(comparePrices);
+        $("p").text(prices[0]);
+      }
+    };
+    xmlhttp.open("GET", url + 0, true);
+    xmlhttp.send();
+    function removeNoDemand(currentValue,index,arr) {
+      if (currentValue.buys.quantity == 0) {
+        arr.splice(index, 1);
+      }
+    }
+    function calculateSpread(currentValue) {
+      currentValue.spread = currentValue.sells.unit_price -currentValue.buys.unit_price;
+    }
+    function comparePrices(arr1, arr2) {
+      return (arr1.spread - arr2.spread);
+    }
+  </script>
+  <body>
+    <h1>Jess Whitworth's Page of Random Awesome</h1>
+    <p>Loading Guid Wars 2 Trading Post Data</p>
+  </body>
 </html>
