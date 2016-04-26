@@ -22,10 +22,12 @@ function getPrices(callback, page) {
         getPrices(callback, page+1);
       } else {
         pricesLoaded = true;
+        $("#loading-progess").text("Finished loading prices.");
         callback();
       }
     }
   };
+  $("#loading-progess").text("Loading Prices Page " + page + ".");
   xmlhttp.open("GET", gwUrlBase + gwUrlPrices + gwUrlPaging + page, true);
   xmlhttp.send();
 }
@@ -35,9 +37,11 @@ function getItem(id, callback) {
   xmlhttp.onreadystatechange = function() {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
       var item = JSON.parse(xmlhttp.responseText);
+      $("#loading-progess").text("Loaded item.");
       callback(item);
     }
   };
+  $("#loading-progess").text("Loading item.");
   xmlhttp.open("GET", gwUrlBase + gwUrlItems + gwUrlIds + id, true);
   xmlhttp.send();
 }
