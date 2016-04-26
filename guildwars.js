@@ -38,7 +38,7 @@ function getItem(id, callback) {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
       var item = JSON.parse(xmlhttp.responseText);
       $("#loading-progess").text("Loaded item.");
-      callback(item);
+      callback(item[0]);
     }
   };
   $("#loading-progess").text("Loading item.");
