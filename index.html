@@ -17,6 +17,7 @@
     function displayGreatestSpread() {
       var priceSpread = gwPrices.slice(0);
       priceSpread.forEach(removeNoDemand);
+      priceSpread.forEach(removeNoSupply);
       priceSpread.forEach(calculateSpread);
       priceSpread.sort(comparePrices);
       greatestSpread = priceSpread[0];
