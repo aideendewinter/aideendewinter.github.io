@@ -27,13 +27,13 @@ function getPrices(callback, page) {
         gwPriceRequests--;
         if (gwPriceRequests <= 0) {
           gwPricesLoaded=true;
-          $("#loading-progess").text("Finished loading prices.");
+          $("#loading-progress").text("Finished loading prices.");
           callback();
         }
       }
     }
   };
-  $("#loading-progess").text("Loading Prices Page " + page + ".");
+  $("#loading-progress").text("Loading Prices Page " + page + ".");
   xmlhttp.open("GET", gwUrlBase + gwUrlPrices + gwUrlPaging + page, true);
   xmlhttp.send();
 }
@@ -43,11 +43,11 @@ function getItem(id, callback) {
   xmlhttp.onreadystatechange = function() {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
       var item = JSON.parse(xmlhttp.responseText);
-      $("#loading-progess").text("Loaded item.");
+      $("#loading-progress").text("Loaded item.");
       callback(item[0]);
     }
   };
-  $("#loading-progess").text("Loading item.");
+  $("#loading-progress").text("Loading item.");
   xmlhttp.open("GET", gwUrlBase + gwUrlItems + gwUrlIds + id, true);
   xmlhttp.send();
 }
