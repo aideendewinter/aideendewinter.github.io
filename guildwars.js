@@ -1,24 +1,47 @@
 var gwUrlBase = "https://api.guildwars2.com/v2/";
 var gwUrlPrices = "commerce/prices";
+var gwUrlItems = "items"
+var gwUrlIds = "?ids="
 var gwUrlPaging = "?page_size=200&page=";
 var gwPrices;
+var gwPricesLoaded = false;
 
-function getPrices(callback) {
-  if gwPrices.length > 0 {
+function getPrices(callback, page) {
+  if (gwPricesLoaded) {
     callback();
     return;
+  }
+  if (page === undefined) {
+    page = 0;
   }
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function() {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-      gwPrices = JSON.parse(xmlhttp.responseText);
-      callback();
+      gwPrices = gwPrices.concat(JSON.parse(xmlhttp.responseText));
+      if (xmlhttp.getResponseHeader("X-Page-Total") > (page+1)) {
+        getPrices(callback, page+1);
+      } else {
+        pricesLoaded = true;
+        callback();
+      }
     }
   };
+  xmlhttp.open("GET", gwUrlBase + gwUrlPrices + gwUrlPaging + page, true);
+  xmlhttp.send();
 }
-xmlhttp.open("GET", gwUrlBase + gwUrlPrices + gwUrlPaging + 0, true);
-xmlhttp.send();
-  
+
+function getItem(id, callback) {
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function() {
+    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+      var item = JSON.parse(xmlhttp.responseText);
+      callback(item);
+    }
+  };
+  xmlhttp.open("GET", gwUrlBase + gwUrlItems + gwUrlIds + id, true);
+  xmlhttp.send();
+}
+
 function removeNoDemand(currentValue,index,arr) {
   if (currentValue.buys.quantity == 0) {
     arr.splice(index, 1);
