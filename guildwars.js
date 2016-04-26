@@ -51,6 +51,12 @@ function removeNoDemand(currentValue,index,arr) {
     arr.splice(index, 1);
   }
 }
+
+function removeNoSupply(currentValue,index,arr) {
+  if (currentValue.sells.quantity == 0) {
+    arr.splice(index, 1);
+  }
+}
   
 function calculateSpread(currentValue) {
   currentValue.spread = currentValue.sells.unit_price -currentValue.buys.unit_price;
