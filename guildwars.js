@@ -5,12 +5,14 @@ var gwUrlIds = "?ids="
 var gwUrlPaging = "?page_size=200&page=";
 var gwPrices=[];
 var gwPricesLoaded = false;
+var gwPriceRequests = 0;
 
 function getPrices(callback, page) {
   if (gwPricesLoaded) {
     callback();
     return;
   }
+  gwPriceRequests++;
   if (page === undefined) {
     page = 0;
   }
@@ -20,10 +22,14 @@ function getPrices(callback, page) {
       gwPrices = gwPrices.concat(JSON.parse(xmlhttp.responseText));
       if (xmlhttp.getResponseHeader("X-Page-Total") > (page+1)) {
         getPrices(callback, page+1);
+        gwPriceRequests--;
       } else {
-        pricesLoaded = true;
-        $("#loading-progess").text("Finished loading prices.");
-        callback();
+        gwPriceRequests--;
+        if (gwPriceRequests <= 0) {
+          gwPricesLoaded=true;
+          $("#loading-progess").text("Finished loading prices.");
+          callback();
+        }
       }
     }
   };
