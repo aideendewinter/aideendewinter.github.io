@@ -4,36 +4,43 @@
   <meta name="description" content="Randomly awesome things I randomly decided to make.">
   <meta name="author" content="Jess Whitworth">
   <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="reset.css">
+  <link rel="stylesheet" type="text/css" href="main.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-  <script>
-    var xmlhttp = new XMLHttpRequest();
-    var url = "https://api.guildwars2.com/v2/commerce/prices?page_size=200&page=";
+  <script src="guildwars.js">
+    var greatestSpread;
+    $(document).ready(function(){
+      getPrices(displayGreatestSpread);
+    });
     
-    xmlhttp.onreadystatechange = function() {
-      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-        var prices = JSON.parse(xmlhttp.responseText);
-        prices.forEach(removeNoDemand);
-        prices.forEach(calculateSpread);
-        prices.sort(comparePrices);
-        $("p").text(prices[0].id + " - " + prices[0].spread);
-      }
-    };
-    xmlhttp.open("GET", url + 0, true);
-    xmlhttp.send();
-    function removeNoDemand(currentValue,index,arr) {
-      if (currentValue.buys.quantity == 0) {
-        arr.splice(index, 1);
-      }
+    function displayGreatestSpread() {
+      var priceSpread = gwPrices.slice(0);
+      priceSpread.forEach(removeNoDemand);
+      priceSpread.forEach(calculateSpread);
+      priceSpread.sort(comparePrices);
+      greatestSpread = priceSpread[0];
+      getItem(greatestSpread.id, displayGreatestSpread2)
     }
-    function calculateSpread(currentValue) {
-      currentValue.spread = currentValue.sells.unit_price -currentValue.buys.unit_price;
-    }
-    function comparePrices(arr1, arr2) {
-      return (arr1.spread - arr2.spread);
+    function displayGreatestSpread2(item) {
+      $("#item-name-GS").text(item.name);
+      $("#item-icon-GS").attr("src", item.icon);
+      $("#item-icon-GS").attr("alt", item.name + "'s Icon");
+      $("#buy-price-GS").text(greatestSpread.buys.unit_price);
+      $("#sell-price-GS").text(greatestSpread.sells.unit_price);
     }
   </script>
   <body>
     <h1>Jess Whitworth's Page of Random Awesome</h1>
     <p>Loading Guid Wars 2 Trading Post Data</p>
+    <div class="info item">
+      <h1 id="item-name-GS"></h1>
+      <img src="#" alt="" id="item-icon-GS"/>
+      <dl>
+        <dt>Buy Price</dt>
+        <dd id="buy-price-GS"></dd>
+        <dt>Sell Price</dt>
+        <ddid="sell-price-GS"></dd>
+      </dl>
+    </div>
   </body>
 </html>
