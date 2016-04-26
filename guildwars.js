@@ -3,7 +3,7 @@ var gwUrlPrices = "commerce/prices";
 var gwUrlItems = "items"
 var gwUrlIds = "?ids="
 var gwUrlPaging = "?page_size=200&page=";
-var gwPrices;
+var gwPrices=[];
 var gwPricesLoaded = false;
 
 function getPrices(callback, page) {
