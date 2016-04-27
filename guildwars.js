@@ -61,5 +61,5 @@ function calculateSpread(currentValue) {
 }
   
 function comparePrices(arr1, arr2) {
-  return (arr1.spread - arr2.spread);
+  return (arr2.spread - arr1.spread);
 }
