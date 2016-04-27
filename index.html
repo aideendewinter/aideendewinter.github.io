@@ -17,8 +17,11 @@
     
     function displayGreatestSpread() {
       var priceSpread = gwPrices.slice(0);
+      $("#array-progress").html("Total array items : " + pricesSpread.);
       priceSpread.forEach(removeNoDemand);
+      $("#array-progress").append("<br />Total array items : " + pricesSpread.);
       priceSpread.forEach(removeNoSupply);
+      $("#array-progress").append("<br />Total array items : " + pricesSpread.);
       priceSpread.forEach(calculateSpread);
       priceSpread.sort(comparePrices);
       greatestSpread = priceSpread[0];
@@ -35,6 +38,7 @@
   <body>
     <h1>Jess Whitworth's Page of Random Awesome</h1>
     <p id="loading-progress">Loading Guid Wars 2 Trading Post Data</p>
+    <p id="array-progress"></p>
     <div class="info item">
       <h1 id="item-name-GS"></h1>
       <img src="#" alt="" id="item-icon-GS"/>
