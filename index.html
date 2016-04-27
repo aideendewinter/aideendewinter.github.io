@@ -25,6 +25,7 @@
       priceSpread.forEach(calculateSpread);
       priceSpread.sort(comparePrices);
       greatestSpread = priceSpread[0];
+      $("#array-progress").append("<br />(greatestSpread.sells.quantity == 0) : " + (greatestSpread.sells.quantity == 0));
       getItem(greatestSpread.id, displayGreatestSpread2)
     }
     function displayGreatestSpread2(item) {
