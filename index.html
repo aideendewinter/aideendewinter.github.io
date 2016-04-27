@@ -24,6 +24,7 @@
       $("#array-progress").append("<br />Total array items : " + priceSpread.length);
       priceSpread.forEach(calculateSpread);
       priceSpread.sort(comparePrices);
+      $("#array-progress").append("<br />Total array items : " + priceSpread.length);
       greatestSpread = priceSpread[0];
       getItem(greatestSpread.id, displayGreatestSpread2)
     }
