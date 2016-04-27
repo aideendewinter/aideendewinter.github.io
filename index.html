@@ -6,29 +6,9 @@
   <meta charset="UTF-8">
   <link rel="stylesheet" type="text/css" href="reset.css">
   <link rel="stylesheet" type="text/css" href="main.css">
-  <script src="guildwars.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="guildwars.js"></script>
   <script>
-    var greatestSpread;
-    $(document).ready(function(){
-      getPrices(displayGreatestSpread);
-    });
-    
-    function displayGreatestSpread() {
-      var priceSpread = gwPrices.filter(hasDemand);
-      priceSpread = priceSpread.filter(hasSupply);
-      priceSpread.forEach(calculateSpread);
-      priceSpread.sort(comparePrices);
-      greatestSpread = priceSpread[0];
-      getItem(greatestSpread.id, displayGreatestSpread2)
-    }
-    function displayGreatestSpread2(item) {
-      $("#item-name-GS").text(item.name);
-      $("#item-icon-GS").attr("src", item.icon);
-      $("#item-icon-GS").attr("alt", item.name + "'s Icon");
-      $("#buy-price-GS").text(greatestSpread.buys.unit_price);
-      $("#sell-price-GS").text(greatestSpread.sells.unit_price);
-    }
   </script>
   <body>
     <h1>Jess Whitworth's Page of Random Awesome</h1>
