@@ -1,7 +1,10 @@
+body {
+    margin: 0;
+    padding: 0;
+}
 .page {
   width: 90%;
-  margin: 0 auto;
-  max-width: 800px;
+  margin: auto;
   position: relative;
 }
 .header:before {
