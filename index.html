@@ -24,7 +24,6 @@
       $("#array-progress").append("<br />Total array items : " + priceSpread.length);
       priceSpread.forEach(calculateSpread);
       priceSpread.sort(comparePrices);
-      $("#array-progress").append("<br />Total array items : " + priceSpread.length);
       greatestSpread = priceSpread[0];
       getItem(greatestSpread.id, displayGreatestSpread2)
     }
@@ -34,6 +33,7 @@
       $("#item-icon-GS").attr("alt", item.name + "'s Icon");
       $("#buy-price-GS").text(greatestSpread.buys.unit_price);
       $("#sell-price-GS").text(greatestSpread.sells.unit_price);
+      $("#array-progress").append("<br />Total array items : " + priceSpread.length);
     }
   </script>
   <body>
