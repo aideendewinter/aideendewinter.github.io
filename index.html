@@ -17,11 +17,11 @@
     
     function displayGreatestSpread() {
       var priceSpread = gwPrices.slice(0);
-      $("#array-progress").html("Total array items : " + pricesSpread.);
+      $("#array-progress").html("Total array items : " + pricesSpread.length);
       priceSpread.forEach(removeNoDemand);
-      $("#array-progress").append("<br />Total array items : " + pricesSpread.);
+      $("#array-progress").append("<br />Total array items : " + pricesSpread.length);
       priceSpread.forEach(removeNoSupply);
-      $("#array-progress").append("<br />Total array items : " + pricesSpread.);
+      $("#array-progress").append("<br />Total array items : " + pricesSpread.length);
       priceSpread.forEach(calculateSpread);
       priceSpread.sort(comparePrices);
       greatestSpread = priceSpread[0];
