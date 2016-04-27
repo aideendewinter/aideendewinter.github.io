@@ -52,16 +52,12 @@ function getItem(id, callback) {
   xmlhttp.send();
 }
 
-function removeNoDemand(currentValue,index,arr) {
-  if (currentValue.buys.quantity == 0) {
-    arr.splice(index, 1);
-  }
+function hasDemand(currentValue) {
+  return (currentValue.buys.quantity !== 0);
 }
 
-function removeNoSupply(currentValue,index,arr) {
-  if (currentValue.sells.quantity == 0) {
-    arr.splice(index, 1);
-  }
+function hasSupply(currentValue) {
+  return (currentValue.sells.quantity !== 0);
 }
   
 function calculateSpread(currentValue) {
