@@ -6,6 +6,28 @@ var gwUrlPaging = "?page_size=200&page=";
 var gwPrices=[];
 var gwPricesLoaded = false;
 var gwPriceRequests = 0;
+var greatestSpread;
+
+$(document).ready(function(){
+  getPrices(displayGreatestSpread);
+});
+    
+function displayGreatestSpread() {
+  var priceSpread = gwPrices.filter(hasDemand);
+  priceSpread = priceSpread.filter(hasSupply);
+  priceSpread.forEach(calculateSpread);
+  priceSpread.sort(comparePrices);
+  greatestSpread = priceSpread[0];
+  getItem(greatestSpread.id, displayGreatestSpread2)
+}
+
+function displayGreatestSpread2(item) {
+  $("#item-name-GS").text(item.name);
+  $("#item-icon-GS").attr("src", item.icon);
+  $("#item-icon-GS").attr("alt", item.name + "'s Icon");
+  $("#buy-price-GS").text(greatestSpread.buys.unit_price);
+  $("#sell-price-GS").text(greatestSpread.sells.unit_price);
+}
 
 function getPrices(callback, page) {
   if (gwPricesLoaded) {
