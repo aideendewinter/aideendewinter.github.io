@@ -19,7 +19,7 @@ body {
     margin: auto;
     padding: 2%;
     background: #000000;
-    border: .05% solid #CCC;
+    border: 1em solid #CCC;
     color: #FFFFFF
 }
 .header:after {
