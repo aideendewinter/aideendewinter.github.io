@@ -19,7 +19,7 @@ body {
     margin: auto;
     padding: 2%;
     background: #000000;
-    border: 1px solid #CCC;
+    border: .05% solid #CCC;
     color: #FFFFFF
 }
 .header:after {
@@ -32,5 +32,5 @@ h1 {
 }
 .content {
   position: relative;
-  padding-top: 12%;
+  padding-top: 15%;
 }
