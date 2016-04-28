@@ -7,18 +7,14 @@ body {
   margin: auto;
   position: relative;
 }
-.header:before {
-  
-}
 .header {
   position: fixed;
   top: 0px;
   height: 50px;
+  width: 90%;
+  margin: auto;
   background: #FFFFFF;
-  
   border: 1px solid #CCC;
-  width: 100%;
-  margin: 0px auto;
 }
 .content {
   position: relative;
