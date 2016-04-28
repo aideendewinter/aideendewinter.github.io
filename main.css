@@ -17,10 +17,15 @@ body {
     border: 1px solid #CCC;
     color: #FFFFFF
 }
+.header:after {
+    content: "";
+    clear: both;
+    display: block;
+}
 h1 {
     text-align: right;
 }
 .content {
   position: relative;
-  padding-top: 52px;
+  padding-top: 2%;
 }
