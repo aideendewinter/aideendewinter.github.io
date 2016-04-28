@@ -22,13 +22,11 @@ body {
     border: 0.25em solid #CCC;
     color: #FFFFFF
 }
-.header:after {
-    content: "";
-    clear: both;
-    display: block;
-}
 h1 {
+    font-family: sans-serif;
     text-align: right;
+    font-size: 1.25em;
+    font-style: bold;
 }
 .content {
   position: relative;
