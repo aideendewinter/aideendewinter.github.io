@@ -7,6 +7,7 @@ body {
     margin: 0;
     padding: 0;
     background: #FFFFFF;
+    font-family: Helvetica, Sans-Serif;
 }
 .page {
     width: 100%;
@@ -30,12 +31,34 @@ h1 {
     font-size: 1.25em;
     font-weight: bold;
 }
+h2 {
+  text-align: center;
+  padding: 0 16px 16px;
+  font-size: 1.2em;
+  font-family: "Times New Roman", Times, Serif;
+  font-weight: bold;
+}
+h3 {
+  text-align: center;
+  padding: 0 16px 16px;
+  font-size: 1.05em;
+  font-family: "Times New Roman", Times, Serif;
+  font-weight: bold;
+}
 .content {
   position: relative;
   margin-top: 80px;
+  padding: 29px;
 }
 div.info {
     width: 250px;
+    padding: 16px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     text-align: center;
+    background: #EA3131;
+    color: white;
+}
+div.item img {
+  float: left;
+  border: solid #CFF3FC;
 }
