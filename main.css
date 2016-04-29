@@ -24,11 +24,11 @@ body {
     color: #FFFFFF;
 }
 h1 {
-    font-family: sans-serif;
+    font-family: 'Kaushan Script', cursive;
     text-align: right;
     vertical-align: middle;
     font-size: 1.25em;
-    font-style: bold;
+    font-weight: bold;
 }
 .content {
   position: relative;
