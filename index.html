@@ -19,7 +19,7 @@
       </div>
       <div class="content">
         <h2>Guild Wars TP Spread</h2>
-        <form id="filters" oninput="setFilters()">
+        <form id="spreadfilters" oninput="setSpreadFilters()">
           <legend>Filters</legend>
           Max Spread<br />
           Gold
@@ -27,14 +27,25 @@
           Silver
           <input type="number" name="silvermax" min="0" max="99" value="0">
         </form>
-        <div class="info item">
-          <h3 class="item-name" id="item-name-GS"></h3>
-          <img src="#" alt="" id="item-icon-GS"/>
+        <div class="info item" id="current-item">
+          <h3 class="item-name" id="item-name"></h3>
+          <img src="#" alt="" id="item-icon"/>
           <dl>
             <dt>Buy Price</dt>
-            <dd id="buy-price-GS"></dd>
+            <dd id="buy-price"></dd>
             <dt>Sell Price</dt>
-            <dd id="sell-price-GS"></dd>
+            <dd id="sell-price"></dd>
+          </dl>
+        </div>
+        </div>
+        <div class="info item" id="next-item">
+          <h3 class="item-name" id="item-name"></h3>
+          <img src="#" alt="" id="item-icon"/>
+          <dl>
+            <dt>Buy Price</dt>
+            <dd id="buy-price"></dd>
+            <dt>Sell Price</dt>
+            <dd id="sell-price"></dd>
           </dl>
         </div>
       </div>
