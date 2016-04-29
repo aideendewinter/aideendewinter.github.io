@@ -20,8 +20,13 @@
       <div class="content">
         <h2>Guild Wars TP Spread</h2>
         <form oninput="x.value=minmaxspread.value">
-          <input type="range" name="minmaxspread" min="0" max="1000000" step="100" value="100">
-          <output name="x"></output>
+          <legend>Filters</legend>
+          Max Spread<br />
+          Gold
+          <input type="range" name="minmaxspread" min="0" max="3000" step="1" value="0">
+          Silver
+          <input type="range" name="minmaxspread" min="0" max="99" step="1" value="0">
+          <output name="x" value="0"></output>
         </form>
         <div class="info item">
           <h3 class="item-name" id="item-name-GS"></h3>
