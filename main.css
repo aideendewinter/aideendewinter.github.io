@@ -57,8 +57,28 @@ div.info {
     text-align: center;
     background: #EA3131;
     color: white;
+    float: left;
 }
 div.item img {
   float: left;
   border: solid #CFF3FC;
+}
+form {
+    height: 2em;
+    width: 100%;
+    margin: auto;
+    
+    background: #DDD;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 0 0 0;
+    color: #FFFFFF;
+}
+form legend {
+  display: inline;
+  vertical-align: middle;
+  font-size: 1.05em;
+  font-family: "Times New Roman", Times, Serif;
+  font-weight: bold;
+}
+form input {
+  display: inline;
 }
