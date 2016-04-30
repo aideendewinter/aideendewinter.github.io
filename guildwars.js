@@ -37,16 +37,22 @@ function displayGreatestSpread(priceSpread) {
   priceSpread = priceSpread.filter(hasSupply);
   priceSpread.forEach(calculateSpread);
   priceSpread.sort(comparePrices);
-  getItem(priceSpread[0].id, displayItem, "#current-item");
-  getItem(priceSpread[1].id, displayItem, "#next-item");
+  getItem(priceSpread[0].id, function(item) {
+	  displayItem(item, "#current-item", priceSpread[0]);
+  });
+  getItem(priceSpread[1].id, function(item) {
+	  displayItem(item, "#next-item", priceSpread[1]);
+  });
 }
 
-function displayItem(item, boxId) {
-  $("#item-name-GS").text(item.name);
-  $("#item-icon-GS").attr("src", item.icon);
-  $("#item-icon-GS").attr("alt", item.name + "'s Icon");
-  $("#buy-price-GS").text(greatestSpread.buys.unit_price);
-  $("#sell-price-GS").text(greatestSpread.sells.unit_price);
+function displayItem(item, boxId, tpData) {
+  $(boxId + " item-name").text(item.name);
+  $(boxId + " item-icon").attr("src", item.icon);
+  $(boxId + " item-icon").attr("alt", item.name + "'s Icon");
+  if (tpData !== undefined) {
+	$(boxId + " buy-price").text(tpData.buys.unit_price);
+	$(boxId + " sell-price").text(tpData.sells.unit_price);
+  }
 }
 
 var getPrices = loadPrices();
@@ -69,12 +75,12 @@ function PriceReadyChange() {
   
 }
 
-function getItem(id, callback, boxId) {
+function getItem(id, callback) {
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function() {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
       var item = JSON.parse(xmlhttp.responseText);
-      callback(item[0], boxId);
+      callback(item[0]);
     }
   };
   xmlhttp.open("GET", gwUrlBase + gwUrlItems + gwUrlIds + id, true);
