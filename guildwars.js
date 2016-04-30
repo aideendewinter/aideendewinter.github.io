@@ -32,7 +32,7 @@ $(document).ready(function(){
   getPrices(displayGreatestSpread);
 });
     
-function displayGreatestSpread(pricesSpread) {
+function displayGreatestSpread(priceSpread) {
   priceSpread = priceSpread.filter(hasDemand);
   priceSpread = priceSpread.filter(hasSupply);
   priceSpread.forEach(calculateSpread);
