@@ -65,15 +65,15 @@ function loadPrices() {
     var firstPage = makeRequest("GET", gwUrlBase + gwUrlPrices + gwUrlPaging + 0);
     firstPage.then(function(result){
 		if (result.pageCount > 1) {
-			var promises;
+			var promises = [];
 			var priceData = JSON.parse(result.respone);
 			for(i = 1; i < result.pageCount; i++) {
-				promises[i-1] = makeRequest("GET", gwUrlBase + gwUrlPrices + gwUrlPaging + i);
+				promises.push(makeRequest("GET", gwUrlBase + gwUrlPrices + gwUrlPaging + i));
 			}
 			var allPromises = Promise.all(promises);
 			allPromises.then(function(results) {
 				for(i = 0; i < results.length; i++) {
-					priceData.concat(JSON.parse(results[i].respone));
+					priceData = priceData.concat(JSON.parse(results[i].respone));
 				}
 				resolve(priceData);
 			}, function(e) {
