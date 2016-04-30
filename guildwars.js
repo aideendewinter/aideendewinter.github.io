@@ -6,22 +6,46 @@ var gwUrlPaging = "?page_size=200&page=";
 var gwPrices=[];
 var gwPricesLoaded = false;
 var gwPriceRequests = 0;
-var greatestSpread;
+var priceSpread;
+
+function makeRequest (method, url) {
+  return new Promise(function (resolve, reject) {
+    var xhr = new XMLHttpRequest();
+    xhr.open(method, url);
+    xhr.onload = function () {
+      if (this.status >= 200 && this.status < 300) {
+        resolve(xhr.response);
+      } else {
+        reject({
+          status: this.status,
+          statusText: xhr.statusText
+        });
+      }
+    };
+    xhr.onerror = function () {
+      reject({
+        status: this.status,
+        statusText: xhr.statusText
+      });
+    };
+    xhr.send();
+  });
+}
 
 $(document).ready(function(){
   getPrices(displayGreatestSpread);
 });
     
-function displayGreatestSpread() {
-  var priceSpread = gwPrices.filter(hasDemand);
+function displayGreatestSpread(pricesSpread) {
+  priceSpread = gwPrices.filter(hasDemand);
   priceSpread = priceSpread.filter(hasSupply);
   priceSpread.forEach(calculateSpread);
   priceSpread.sort(comparePrices);
-  greatestSpread = priceSpread[0];
-  getItem(greatestSpread.id, displayGreatestSpread2)
+  getItem(priceSpread[0].id, displayItem, "#current-item");
+  getItem(priceSpread[1].id, displayItem, "#next-item");
 }
 
-function displayGreatestSpread2(item) {
+function displayItem(item, boxId) {
   $("#item-name-GS").text(item.name);
   $("#item-icon-GS").attr("src", item.icon);
   $("#item-icon-GS").attr("alt", item.name + "'s Icon");
@@ -29,41 +53,32 @@ function displayGreatestSpread2(item) {
   $("#sell-price-GS").text(greatestSpread.sells.unit_price);
 }
 
-function getPrices(callback, page) {
-  if (gwPricesLoaded) {
-    callback();
-    return;
-  }
-  gwPriceRequests++;
-  if (page === undefined) {
-    page = 0;
-  }
-  var xmlhttp = new XMLHttpRequest();
-  xmlhttp.onreadystatechange = function() {
-    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-      gwPrices = gwPrices.concat(JSON.parse(xmlhttp.responseText));
-      if (xmlhttp.getResponseHeader("X-Page-Total") > (page+1)) {
-        getPrices(callback, page+1);
-        gwPriceRequests--;
-      } else {
-        gwPriceRequests--;
-        if (gwPriceRequests <= 0) {
-          gwPricesLoaded=true;
-          callback();
-        }
-      }
-    }
+var getPrices = loadPrices();
+
+function loadPrices() {
+  var allPages = new Promise(function (resolve, reject) {
+    var firstPage = makeRequest("GET", gwUrlBase + gwUrlPrices + gwUrlPaging + 0);
+    firstPage.then(function(result){
+      resolve(JSON.parse(result));
+    }, function(err) {
+      reject(err);
+    });
+  });
+  return function(callback) {
+    allPages.then(callback);
   };
-  xmlhttp.open("GET", gwUrlBase + gwUrlPrices + gwUrlPaging + page, true);
-  xmlhttp.send();
 }
 
-function getItem(id, callback) {
+function PriceReadyChange() {
+  
+}
+
+function getItem(id, callback, boxId) {
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function() {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
       var item = JSON.parse(xmlhttp.responseText);
-      callback(item[0]);
+      callback(item[0], boxId);
     }
   };
   xmlhttp.open("GET", gwUrlBase + gwUrlItems + gwUrlIds + id, true);
