@@ -12,7 +12,7 @@ function makeRequest (method, url) {
       if (this.status >= 200 && this.status < 300) {
         resolve({
 			respone: xhr.response,
-			pageCount: xhr.getResponseHeader("X-Page-Total");
+			pageCount: xhr.getResponseHeader("X-Page-Total")
 		});
       } else {
         reject({
