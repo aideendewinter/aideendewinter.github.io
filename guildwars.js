@@ -33,7 +33,7 @@ $(document).ready(function(){
 });
     
 function displayGreatestSpread(pricesSpread) {
-  priceSpread = gwPrices.filter(hasDemand);
+  priceSpread = priceSpread.filter(hasDemand);
   priceSpread = priceSpread.filter(hasSupply);
   priceSpread.forEach(calculateSpread);
   priceSpread.sort(comparePrices);
