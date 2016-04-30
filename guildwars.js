@@ -11,7 +11,7 @@ function makeRequest (method, url) {
     xhr.onload = function () {
       if (this.status >= 200 && this.status < 300) {
         resolve({
-			respone: xhr.response;
+			respone: xhr.response,
 			pageCount: xhr.getResponseHeader("X-Page-Total");
 		});
       } else {
