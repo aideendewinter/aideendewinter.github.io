@@ -66,19 +66,12 @@ div.item img {
 form {
     height: 2em;
     width: 100%;
-    margin: auto;
-    
+    margin: auto;    
     background: #DDD;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 0 0 0;
     color: #FFFFFF;
+    vertical-align: middle;
 }
-form legend {
-  display: inline;
-  vertical-align: middle;
-  font-size: 1.05em;
-  font-family: "Times New Roman", Times, Serif;
-  font-weight: bold;
-}
-form input {
-  display: inline;
+form h2 {
+  text-align: left;
 }
