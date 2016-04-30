@@ -46,12 +46,12 @@ function displayGreatestSpread(priceSpread) {
 }
 
 function displayItem(item, boxId, tpData) {
-  $(boxId + " item-name").text(item.name);
-  $(boxId + " item-icon").attr("src", item.icon);
-  $(boxId + " item-icon").attr("alt", item.name + "'s Icon");
+  $(boxId + " .item-name").text(item.name);
+  $(boxId + " .item-icon").attr("src", item.icon);
+  $(boxId + " .item-icon").attr("alt", item.name + "'s Icon");
   if (tpData !== undefined) {
-	$(boxId + " buy-price").text(tpData.buys.unit_price);
-	$(boxId + " sell-price").text(tpData.sells.unit_price);
+	$(boxId + " .buy-price").text(tpData.buys.unit_price);
+	$(boxId + " .sell-price").text(tpData.sells.unit_price);
   }
 }
 
