@@ -3,10 +3,6 @@ var gwUrlPrices = "commerce/prices";
 var gwUrlItems = "items"
 var gwUrlIds = "?ids="
 var gwUrlPaging = "?page_size=200&page=";
-var gwPrices=[];
-var gwPricesLoaded = false;
-var gwPriceRequests = 0;
-var priceSpread;
 
 function makeRequest (method, url) {
   return new Promise(function (resolve, reject) {
