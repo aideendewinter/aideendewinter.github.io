@@ -108,6 +108,11 @@ function setSpreadFilters() {
     var goldMax = document.forms["spreadfilters"]["goldmax"].value;
     var silverMax = document.forms["spreadfilters"]["silvermax"].value;
     
+    if (goldMax == 0 && silverMax == 0) {
+    	document.forms["spreadfilters"]["silvermax"].value = 1;
+    	silverMax = 1;
+    }
+    
     getPrices(function(priceSpread) {
     	filteredSpread = priceSpread.filter(function(currentValue) {
     		return (currentValue.spread <= (goldMax * 10000 + silverMax * 100));
