@@ -36,8 +36,9 @@ $(document).ready(function(){
 });
     
 function displayGreatestSpread(priceSpread) {
-  priceSpread = priceSpread.filter(hasDemand);
-  priceSpread = priceSpread.filter(hasSupply);
+  priceSpread = priceSpread.filter(function(currentValue) {
+  	return ((currentValue.buys.quantity !== 0) && (currentValue.sells.quantity !== 0));
+  });
   priceSpread.forEach(calculateSpread);
   priceSpread.sort(comparePrices);
   getItem(priceSpread[0].id, function(item) {
@@ -91,10 +92,6 @@ function loadPrices() {
   };
 }
 
-function PriceReadyChange() {
-  
-}
-
 function getItem(id, callback) {
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function() {
@@ -107,12 +104,21 @@ function getItem(id, callback) {
   xmlhttp.send();
 }
 
-function hasDemand(currentValue) {
-  return (currentValue.buys.quantity !== 0);
-}
-
-function hasSupply(currentValue) {
-  return (currentValue.sells.quantity !== 0);
+function setSpreadFilters() {
+    var goldMax = document.forms["spreadfilters"]["goldmax"].value;
+    var silverMax = document.forms["spreadfilters"]["silvermax"].value;
+    
+    getPrices(function(priceSpread) {
+    	filteredSpread = priceSpread.filter(function(currentValue) {
+    		return (currentValue.spread <= (goldMax * 10000 + silverMax * 100));
+    	});
+    	getItem(priceSpread[0].id, function(item) {
+    		displayItem(item, "#current-item", priceSpread[0]);
+    	});
+    	getItem(priceSpread[1].id, function(item) {
+    		displayItem(item, "#next-item", priceSpread[1]);
+    	});	
+    });
 }
   
 function calculateSpread(currentValue) {
