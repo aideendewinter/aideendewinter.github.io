@@ -60,6 +60,8 @@ div.info {
     float: left;
 }
 div.item img {
+    max-width: 64px;
+    max-height: 64px;
   float: left;
   border: solid #CFF3FC;
 }
