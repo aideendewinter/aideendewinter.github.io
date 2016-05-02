@@ -117,6 +117,7 @@ function setSpreadFilters() {
     	var filteredSpread = priceSpread.filter(function(currentValue) {
     		return (currentValue.spread <= (goldMax * 10000 + silverMax * 100));
     	});
+    	filteredSpread.sort(comparePrices);
     	getItem(filteredSpread[0].id, function(item) {
     		displayItem(item, "#current-item", filteredSpread[0]);
     	});
