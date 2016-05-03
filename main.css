@@ -67,14 +67,17 @@ div.item img {
 }
 form {
   margin: 16px;
-    height: 4em;
+  padding: 16px;
     width: 100%;  
     background: #DDD;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 0 0 0;
     color: #000;
+    text-align: center;
 }
-form * {
-  display: inline;
+form div {
+  display: inline-block;
+}
+form div * {
   margin: .5em 5px;
   max-width: 60px;
 }
