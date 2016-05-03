@@ -107,15 +107,32 @@ function getItem(id, callback) {
 function setSpreadFilters() {
     var goldMax = document.forms["spreadfilters"]["goldmax"].value;
     var silverMax = document.forms["spreadfilters"]["silvermax"].value;
+    var goldMin = document.forms["spreadfilters"]["goldmin"].value;
+    var silverMin = document.forms["spreadfilters"]["silvermin"].value;
+    var goldMaxBuy = document.forms["spreadfilters"]["goldmaxbuy"].value;
+    var silverMaxBuy = document.forms["spreadfilters"]["silvermaxbuy"].value;
+    
+    var max = (goldMax * 10000 + silverMax * 100);
+    var min = (goldMin * 10000 + silverMin * 100);
+    var maxBuy = (goldMaxBuy * 10000 + silverMaxBuy * 100)
     
     if (goldMax == 0 && silverMax == 0) {
     	document.forms["spreadfilters"]["silvermax"].value = 1;
     	silverMax = 1;
+    	max = (goldMax * 10000 + silverMax * 100);
+    }
+    if (max < min) {
+    	document.forms["spreadfilters"]["goldmax"].value = goldMin;
+    	document.forms["spreadfilters"]["silvermax"].value = silverMin;
+    	goldMax = goldMin;
+    	silverMax = silverMin;
+    	max = (goldMax * 10000 + silverMax * 100);
     }
     
     getPrices(function(priceSpread) {
     	var filteredSpread = priceSpread.filter(function(currentValue) {
-    		return (currentValue.spread <= (goldMax * 10000 + silverMax * 100));
+    		return ((currentValue.spread <= max) && (currentValue.spread >= min) &&
+    		(currentValue.buys.unit_price <= maxBuy));
     	});
     	filteredSpread.sort(comparePrices);
     	getItem(filteredSpread[0].id, function(item) {
@@ -128,7 +145,7 @@ function setSpreadFilters() {
 }
   
 function calculateSpread(currentValue) {
-  currentValue.spread = currentValue.sells.unit_price -currentValue.buys.unit_price;
+  currentValue.spread = currentValue.sells.unit_price - currentValue.buys.unit_price;
 }
   
 function comparePrices(arr1, arr2) {
