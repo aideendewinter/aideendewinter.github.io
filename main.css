@@ -67,7 +67,7 @@ div.item img {
 }
 form {
   margin: 16px;
-    height: 2em;
+    height: 4em;
     width: 100%;  
     background: #DDD;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 0 0 0;
@@ -76,6 +76,7 @@ form {
 form * {
   display: inline;
   margin: .5em 5px;
+  max-width: 60px;
 }
 form h2 {
   padding: 0;
