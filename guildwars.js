@@ -33,6 +33,9 @@ function makeRequest (method, url) {
 
 $(document).ready(function(){
   getPrices(displayGreatestSpread);
+  $("stack").on("swipeleft",function(){
+  	$(this).hide();
+  });
 });
     
 function displayGreatestSpread(priceSpread) {
