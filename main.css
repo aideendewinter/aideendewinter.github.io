@@ -64,15 +64,11 @@ div.info {
 div:hover {
   z-index: 1;
 }
-
-.next {
-  z-index: -1;
-}
-
 .next {
   position: relative;
   left: 75px;
   bottom: 60px;
+  z-index: -1;
 }
 div.item img {
     max-width: 64px;
