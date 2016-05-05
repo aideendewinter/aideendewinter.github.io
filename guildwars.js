@@ -1,9 +1,4 @@
-var gwUrlBase = "https://api.guildwars2.com/v2/";
-var gwUrlPrices = "commerce/prices";
-var gwUrlItems = "items"
-var gwUrlIds = "?ids="
-var gwUrlPaging = "?page_size=200&page=";
-
+// http://stackoverflow.com/questions/30008114/how-do-i-promisify-native-xhr
 function makeRequest (method, url) {
   return new Promise(function (resolve, reject) {
     var xhr = new XMLHttpRequest();
@@ -31,9 +26,18 @@ function makeRequest (method, url) {
   });
 }
 
+// My code.
+// String constants for constructing GW API requests.
+var gwUrlBase = "https://api.guildwars2.com/v2/";
+var gwUrlPrices = "commerce/prices";
+var gwUrlItems = "items"
+var gwUrlIds = "?ids="
+var gwUrlPaging = "?page_size=200&page=";
+
+// 
 $(document).ready(function(){
   getPrices(displayGreatestSpread);
-  $("stack").on("swipeleft",function(){
+  $(".next").on("click",function(){
   	$(this).hide();
   });
 });
