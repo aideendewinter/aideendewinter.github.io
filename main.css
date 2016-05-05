@@ -61,17 +61,18 @@ div.info {
     background: #EA3131;
     color: white;
 }
-#next-item {
+div:hover {
+  z-index: 1;
+}
+
+.next {
+  z-index: -1;
+}
+
+.next {
   position: relative;
   left: 75px;
   bottom: 60px;
-  z-index: -1;
-}
-#next-item:hover {
-  position: relative;
-  right: 150px;
-  top: 70px;
-  z-index: 1;
 }
 div.item img {
     max-width: 64px;
