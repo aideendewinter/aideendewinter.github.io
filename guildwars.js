@@ -36,10 +36,14 @@ var gwUrlPaging = "?page_size=200&page=";
 
 // 
 $(document).ready(function(){
-  getPrices(displayGreatestSpread);
-  $(".next").on("click",function(){
-  	$(this).hide();
-  });
+	getPrices(displayGreatestSpread);
+	$(".stack.next").on("click",function(){
+		$(this).css("z-index", "1");
+		$(this).animate({
+			left: '0',
+			bottom: '0'
+		});
+	});
 });
     
 function displayGreatestSpread(priceSpread) {
