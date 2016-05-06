@@ -25,6 +25,19 @@ function makeRequest (method, url) {
 		xhr.send();
 	});
 }
+// http://stackoverflow.com/questions/8034918/jquery-switch-elements-in-dom
+function swapElements(elm1, elm2) {
+    var parent1, next1,
+        parent2, next2;
+
+    parent1 = elm1.parentNode;
+    next1   = elm1.nextSibling;
+    parent2 = elm2.parentNode;
+    next2   = elm2.nextSibling;
+
+    parent1.insertBefore(elm2, next1);
+    parent2.insertBefore(elm1, next2);
+}
 
 // My code.
 // String constants for constructing GW API requests.
@@ -34,18 +47,29 @@ var gwUrlItems = "items"
 var gwUrlIds = "?ids="
 var gwUrlPaging = "?page_size=200&page=";
 
-// 
+// Current index of priceSpread item.
+var pS=0;
+// Entry to AJAX code.
 $(document).ready(function(){
+	// Fetch GW Price data and display two greatest spreads.
 	getPrices(displayGreatestSpread);
+	
+	// Allow navigation of prices.
 	$(".stack.next").on("click",function(){
+		$(".stack.current").fadeOut();
 		$(this).css("z-index", "1");
 		$(this).animate({
 			left: '0',
 			bottom: $(this).innerHeight()
-		});
+		}, stackReset);
 	});
 });
-    
+
+function stackReset() {
+	swapElements($(".stack.current")[0], $(".stack.next")[0]);
+}
+
+// 
 function displayGreatestSpread(priceSpread) {
   priceSpread = priceSpread.filter(function(currentValue) {
   	return ((currentValue.buys.quantity !== 0) && (currentValue.sells.quantity !== 0));
