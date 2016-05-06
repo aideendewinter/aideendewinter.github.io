@@ -41,7 +41,7 @@ $(document).ready(function(){
 		$(this).css("z-index", "1");
 		$(this).animate({
 			left: '0',
-			bottom: $(this).innerHeight() + $(".stack.current").innerHeight();
+			bottom: $(this).innerHeight()
 		});
 	});
 });
