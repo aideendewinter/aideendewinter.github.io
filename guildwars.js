@@ -38,11 +38,10 @@ var gwUrlPaging = "?page_size=200&page=";
 $(document).ready(function(){
 	getPrices(displayGreatestSpread);
 	$(".stack.next").on("click",function(){
-		$(".stack.current").fadeOut();
 		$(this).css("z-index", "1");
 		$(this).animate({
 			left: '0',
-			bottom: '0'
+			bottom: $(this).innerHeight() + $(".stack.current").innerHeight();
 		});
 	});
 });
