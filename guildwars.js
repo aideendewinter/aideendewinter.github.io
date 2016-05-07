@@ -69,6 +69,11 @@ function stackReset() {
 	$('.stack.current').html($('.stack.next').html());
 	$('.stack.current').show();
 	$('.stack.next').hide();
+	$('.stack.next').css("z-index", '');
+	$('.stack.next').css("left", '');
+	$('.stack.next').css("bottom", '');
+	pS++;
+	setSpreadFilters(pS);
 }
 
 // 
@@ -141,7 +146,11 @@ function getItem(id, callback) {
   xmlhttp.send();
 }
 
-function setSpreadFilters() {
+function setSpreadFilters(pSIndex) {
+	if (pSIndex === undefined) {
+		pS = 0;
+		pSIndex = 0;
+	}
     var goldMax = document.forms["spreadfilters"]["goldmax"].value;
     var silverMax = document.forms["spreadfilters"]["silvermax"].value;
     var goldMin = document.forms["spreadfilters"]["goldmin"].value;
@@ -172,11 +181,13 @@ function setSpreadFilters() {
     		(currentValue.buys.unit_price <= maxBuy));
     	});
     	filteredSpread.sort(comparePrices);
-    	getItem(filteredSpread[0].id, function(item) {
-    		displayItem(item, "#current-item", filteredSpread[0]);
+    	getItem(filteredSpread[pSIndex].id, function(item) {
+    		displayItem(item, "#current-item", filteredSpread[pSIndex]);
+    		$('.stack.current').show();
     	});
-    	getItem(filteredSpread[1].id, function(item) {
-    		displayItem(item, "#next-item", filteredSpread[1]);
+    	getItem(filteredSpread[pSIndex+1].id, function(item) {
+    		displayItem(item, "#next-item", filteredSpread[pSIndex+1]);
+    		$('.stack.next').show();
     	});	
     });
 }
