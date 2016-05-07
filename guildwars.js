@@ -200,6 +200,10 @@ function setSpreadFilters(pSIndex) {
     	filteredSpread.sort(comparePrices);
     	getItem(filteredSpread[pSIndex].id, function(item) {
     		displayItem(item, "#current-item", filteredSpread[pSIndex]);
+			if ($('.stack.current').css("opacity") < 1) {
+				$('.stack.current').css("opacity", '');
+				$('.stack.current').hide();
+			}
     		$('.stack.current').fadeIn();
     	});
     	getItem(filteredSpread[pSIndex+1].id, function(item) {
