@@ -183,11 +183,11 @@ function setSpreadFilters(pSIndex) {
     	filteredSpread.sort(comparePrices);
     	getItem(filteredSpread[pSIndex].id, function(item) {
     		displayItem(item, "#current-item", filteredSpread[pSIndex]);
-    		$('.stack.current').show();
+    		$('.stack.current').fadeIn();
     	});
     	getItem(filteredSpread[pSIndex+1].id, function(item) {
     		displayItem(item, "#next-item", filteredSpread[pSIndex+1]);
-    		$('.stack.next').show();
+    		$('.stack.next').fadeIn();
     	});	
     });
 }
