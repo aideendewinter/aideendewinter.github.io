@@ -66,8 +66,9 @@ $(document).ready(function(){
 });
 
 function stackReset() {
-	$(".stack.next").css("bottom", 0);
-	swapElements($(".stack.current")[0], $(".stack.next")[0]);
+	$('.stack.current').html($('.stack.next').html());
+	$('.stack.current').show();
+	$('.stack.next').hide();
 }
 
 // 
