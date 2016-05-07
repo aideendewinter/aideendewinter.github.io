@@ -64,8 +64,10 @@ div.info {
 div:hover {
   z-index: 1;
 }
-.next {
+.stack {
   position: relative;
+}
+.next {
   left: 75px;
   bottom: 60px;
   z-index: -1;

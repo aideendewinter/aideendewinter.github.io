@@ -66,7 +66,7 @@ $(document).ready(function(){
 	$(".stack.current").on("click",function(){
 		$(".stack.next").fadeOut();
 		$(this).animate({
-			left: '0',
+			left: '75px',
 			bottom: (60 - $(".stack.next").innerHeight()) + "px"
 		}, stackBackwardReset);
 	});
