@@ -86,7 +86,7 @@ function stackForwardReset() {
 function stackBackwardReset() {
 	$('.stack.next').html($('.stack.current').html());
 	$('.stack.next').show();
-	$('.stack.current').hide();
+	$('.stack.current').css("opacity", '.01');
 	$('.stack.current').css("left", '');
 	$('.stack.current').css("bottom", '');
 	pS--;
