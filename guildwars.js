@@ -60,7 +60,7 @@ $(document).ready(function(){
 		$(this).css("z-index", "1");
 		$(this).animate({
 			left: '0',
-			bottom: $(this).innerHeight()
+			bottom: $(".stack.current").innerHeight()
 		}, stackReset);
 	});
 });
