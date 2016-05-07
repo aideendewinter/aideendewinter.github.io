@@ -61,11 +61,18 @@ $(document).ready(function(){
 		$(this).animate({
 			left: '0',
 			bottom: $(".stack.current").innerHeight()
-		}, stackReset);
+		}, stackForwardReset);
+	});
+	$(".stack.current").on("click",function(){
+		$(".stack.next").fadeOut();
+		$(this).animate({
+			left: '0',
+			bottom: (60 - $(".stack.next").innerHeight()) + "px"
+		}, stackBackwardReset);
 	});
 });
 
-function stackReset() {
+function stackForwardReset() {
 	$('.stack.current').html($('.stack.next').html());
 	$('.stack.current').show();
 	$('.stack.next').hide();
@@ -73,6 +80,15 @@ function stackReset() {
 	$('.stack.next').css("left", '');
 	$('.stack.next').css("bottom", '');
 	pS++;
+	setSpreadFilters(pS);
+}
+function stackBackwardReset() {
+	$('.stack.next').html($('.stack.current').html());
+	$('.stack.next').show();
+	$('.stack.current').hide();
+	$('.stack.current').css("left", '');
+	$('.stack.current').css("bottom", '');
+	pS--;
 	setSpreadFilters(pS);
 }
 
