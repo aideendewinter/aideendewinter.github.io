@@ -65,9 +65,10 @@ $(document).ready(function(){
 	});
 	$(".stack.current").on("click",function(){
 		$(".stack.next").fadeOut();
+		var targetHeight = (60 - $(".stack.next").innerHeight()) + "px";
 		$(this).animate({
 			left: '75px',
-			bottom: (60 - $(".stack.next").innerHeight()) + "px"
+			bottom: targetHeight
 		}, stackBackwardReset);
 	});
 });
