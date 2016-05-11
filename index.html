@@ -59,8 +59,9 @@
           </dl>
         </div>
         <h2>Guild Wars Crafting Profit</h2>
-        <form id="craftingprofit" oninput="setProfitFilters()">
+        <form id="craftingprofit" onsubmit="setProfitFilters()">
           <h2>Account &amp; Discipline Selection</h2>
+          <input type="submit" value="Update">
           <div>
             API Key
             <input type="text" name="apikey">API Key</input>
@@ -68,7 +69,6 @@
           <div>
             Character
             <select name="characters" id="characterDD">
-            	
             </select>
           </div>
         </form>
