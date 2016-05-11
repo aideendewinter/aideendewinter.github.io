@@ -46,6 +46,7 @@ var gwUrlPrices = "commerce/prices";
 var gwUrlItems = "items"
 var gwUrlIds = "?ids="
 var gwUrlPaging = "?page_size=200&page=";
+var gwUrlAuth = "";
 
 // Current index of priceSpread item.
 var pS=0;
@@ -212,7 +213,13 @@ function setSpreadFilters(pSIndex) {
     	});	
     });
 }
-  
+
+function setProfitFilters() {
+	var apikey = document.forms["craftingprofit"]["apikey"].value;
+	
+	//var firstPage = makeRequest("GET", gwUrlBase + gwUrlPrices + gwUrlPaging + 0 + );
+}
+
 function calculateSpread(currentValue) {
   currentValue.spread = currentValue.sells.unit_price - currentValue.buys.unit_price;
 }
