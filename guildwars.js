@@ -232,6 +232,8 @@ function setProfitFilters() {
 			
 		});
 	}
+	
+	return false;
 }
 
 function calculateSpread(currentValue) {
