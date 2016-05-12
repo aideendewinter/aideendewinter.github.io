@@ -44,7 +44,7 @@ function swapElements(elm1, elm2) {
 var gwUrlBase = "https://api.guildwars2.com/v2/";
 var gwUrlPrices = "commerce/prices";
 var gwUrlItems = "items"
-var gwUrlItems = "characters"
+var gwUrlCharacters = "characters"
 var gwUrlIds = "?ids="
 var gwUrlPaging = "?page_size=200&page=";
 var gwUrlAuth = "?access_token=";
@@ -219,9 +219,15 @@ var apikey;
 function setProfitFilters() {
 	if (apikey != document.forms["craftingprofit"]["apikey"].value) {
 		apikey = document.forms["craftingprofit"]["apikey"].value;
-		var characters = makeRequest("GET", gwUrlBase + gwUrlPrices + gwUrlPaging + 0 + gw2UrlAuth + apikey);
+		var characters = makeRequest("GET", gwUrlBase + gwUrlCharacters + gw2UrlAuth + apikey);
 		characters.then(function(result){
-			
+			var characterNames = JSON.parse(result.respone);
+			var characterHTML = "";
+			for(i=0; i<characterNames.length; i++) {
+				characterHTML.concat('<option value="' + encodeURIComponent(characterNames[i]) +
+					'">' + characterNames[i] + '</option>');
+			}
+			$("#characterDD").html = characterHTML;
 		}, function(err) {
 			
 		});
