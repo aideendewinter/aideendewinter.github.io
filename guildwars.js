@@ -54,6 +54,10 @@ var pS=0;
 // Entry to AJAX code.
 $(document).ready(function(){
 	// Fetch GW Price data and display two greatest spreads.
+	$('#craftingprofit').submit(function (evt) {
+    	evt.preventDefault();
+    	window.history.back();
+	});
 	getPrices(displayGreatestSpread);
 	
 	// Allow navigation of prices.
@@ -232,8 +236,6 @@ function setProfitFilters() {
 			
 		});
 	}
-	
-	return false;
 }
 
 function calculateSpread(currentValue) {
