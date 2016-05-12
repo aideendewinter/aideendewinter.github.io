@@ -44,9 +44,10 @@ function swapElements(elm1, elm2) {
 var gwUrlBase = "https://api.guildwars2.com/v2/";
 var gwUrlPrices = "commerce/prices";
 var gwUrlItems = "items"
+var gwUrlItems = "characters"
 var gwUrlIds = "?ids="
 var gwUrlPaging = "?page_size=200&page=";
-var gwUrlAuth = "";
+var gwUrlAuth = "?access_token=";
 
 // Current index of priceSpread item.
 var pS=0;
@@ -214,10 +215,17 @@ function setSpreadFilters(pSIndex) {
     });
 }
 
+var apikey;
 function setProfitFilters() {
-	var apikey = document.forms["craftingprofit"]["apikey"].value;
-	
-	//var firstPage = makeRequest("GET", gwUrlBase + gwUrlPrices + gwUrlPaging + 0 + );
+	if (apikey != document.forms["craftingprofit"]["apikey"].value) {
+		apikey = document.forms["craftingprofit"]["apikey"].value;
+		var characters = makeRequest("GET", gwUrlBase + gwUrlPrices + gwUrlPaging + 0 + gw2UrlAuth + apikey);
+		characters.then(function(result){
+			
+		}, function(err) {
+			
+		});
+	}
 }
 
 function calculateSpread(currentValue) {
