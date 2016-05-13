@@ -56,7 +56,6 @@ $(document).ready(function(){
 	// Fetch GW Price data and display two greatest spreads.
 	$('#craftingprofit').submit(function (evt) {
     	evt.preventDefault();
-    	window.history.back();
 	});
 	getPrices(displayGreatestSpread);
 	
