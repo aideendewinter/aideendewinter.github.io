@@ -223,7 +223,7 @@ var apikey;
 function setProfitFilters() {
 	if (apikey != document.forms["craftingprofit"]["apikey"].value) {
 		apikey = document.forms["craftingprofit"]["apikey"].value;
-		var characters = makeRequest("GET", gwUrlBase + gwUrlCharacters + gw2UrlAuth + apikey);
+		var characters = makeRequest("GET", gwUrlBase + gwUrlCharacters + gwUrlAuth + apikey);
 		characters.then(function(result){
 			var characterNames = JSON.parse(result.respone);
 			var characterHTML = "";
