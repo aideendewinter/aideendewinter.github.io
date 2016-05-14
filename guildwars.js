@@ -231,7 +231,7 @@ function setProfitFilters() {
 				characterHTML = characterHTML.concat('<option value="' + encodeURIComponent(characterNames[i]) +
 					'">' + characterNames[i] + '</option>');
 			}
-			$("#characterDD").text(characterHTML);
+			$("#characterDD").html(characterHTML);
 		}, function(err) {
 			
 		});
