@@ -228,10 +228,10 @@ function setProfitFilters() {
 			var characterNames = JSON.parse(result.respone);
 			var characterHTML = "";
 			for(i=0; i<characterNames.length; i++) {
-				characterHTML.concat('<option value="' + encodeURIComponent(characterNames[i]) +
+				characterHTML = characterHTML.concat('<option value="' + encodeURIComponent(characterNames[i]) +
 					'">' + characterNames[i] + '</option>');
 			}
-			$("#characterDD").html(characterHTML);
+			$("#characterDD").text(characterHTML);
 		}, function(err) {
 			
 		});
