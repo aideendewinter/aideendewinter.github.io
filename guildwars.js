@@ -141,6 +141,9 @@ function loadPrices() {
 				for(i = 0; i < results.length; i++) {
 					priceData = priceData.concat(JSON.parse(results[i].respone));
 				}
+				priceData = priceData.filter(function(currentValue) {
+					return (currentValue != null);
+				});
 				resolve(priceData);
 			}, function(e) {
 				reject(e);
