@@ -220,6 +220,7 @@ function setSpreadFilters(pSIndex) {
 }
 
 var apikey;
+var activeCharacter;
 function setProfitFilters() {
 	if (apikey != document.forms["craftingprofit"]["apikey"].value) {
 		apikey = document.forms["craftingprofit"]["apikey"].value;
@@ -232,6 +233,21 @@ function setProfitFilters() {
 					'">' + characterNames[i] + '</option>');
 			}
 			$("#characterDD").html(characterHTML);
+		}, function(err) {
+			
+		});
+	}
+	if (activeCharacter.name != document.forms["craftingprofit"]["characters"].value) {
+		activeCharacter.name = document.forms["craftingprofit"]["characters"].value;
+		var character = makeRequest("GET", gwUrlBase + gwUrlCharacters + '/' + activeCharacter.name + gwUrlAuth + apikey);
+		character.then(function(result){
+			activeCharacter = JSON.parse(result.respone);
+			var disciplineHTML = "";
+			for(i=0; i<activeCharacter.crafting.length; i++) {
+				disciplineHTML = disciplineHTML.concat('<option value="' + activeCharacter.crafting[i].discipline +
+					'">' + activeCharacter.crafting[i].discipline + '</option>');
+			}
+			$("#disciplineDD").html(disciplineHTML);
 		}, function(err) {
 			
 		});
