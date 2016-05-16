@@ -255,7 +255,7 @@ function setProfitFilters() {
 			
 		});
 	} else if (activeCharacter == undefined) {
-	} else if (encodeURIComponent(activeCharacter.name) == document.forms["craftingprofit"]["apikey"].value) {
+	} else if (encodeURIComponent(activeCharacter.name) != document.forms["craftingprofit"]["apikey"].value) {
 		var character = makeRequest("GET", gwUrlBase + gwUrlCharacters + '/' +
 			document.forms["craftingprofit"]["characters"].value + gwUrlAuth + apikey);
 		character.then(function(result){
