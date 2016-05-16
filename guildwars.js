@@ -240,7 +240,21 @@ function setProfitFilters() {
 			
 		});
 	}
-	if (activeCharacter == undefined) {
+	if ((activeCharacter == undefined) && (document.forms["craftingprofit"]["characters"].value != null)) {
+		var character = makeRequest("GET", gwUrlBase + gwUrlCharacters + '/' +
+			document.forms["craftingprofit"]["characters"].value + gwUrlAuth + apikey);
+		character.then(function(result){
+			activeCharacter = JSON.parse(result.respone);
+			var disciplineHTML = "";
+			for(i=0; i<activeCharacter.crafting.length; i++) {
+				disciplineHTML = disciplineHTML.concat('<option value="' + activeCharacter.crafting[i].discipline +
+					'">' + activeCharacter.crafting[i].discipline + '</option>');
+			}
+			$("#disciplineDD").html(disciplineHTML);
+		}, function(err) {
+			
+		});
+	} else if (activeCharacter == undefined) {
 	} else if (encodeURIComponent(activeCharacter.name) == document.forms["craftingprofit"]["apikey"].value) {
 		var character = makeRequest("GET", gwUrlBase + gwUrlCharacters + '/' +
 			document.forms["craftingprofit"]["characters"].value + gwUrlAuth + apikey);
