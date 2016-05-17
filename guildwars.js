@@ -160,6 +160,22 @@ function loadPrices() {
   };
 }
 
+var getIngredients = loadIngredients();
+
+function loadIngredients() {
+  var allStorage = new Promise(function (resolve, reject) {
+  	var promises = [];
+    promises.push(makeRequest("GET", gwUrlBase + gwUrlMatStorage));
+    var allPromises = Promise.all(promises);
+    allPromises.then (function (results) {
+    	
+    });
+  });
+  return function(callback) {
+    allStorage.then(callback);
+  };
+}
+
 function getItem(id, callback) {
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function() {
@@ -237,6 +253,9 @@ function setProfitFilters() {
 					'">' + characterNames[i] + '</option>');
 			}
 			$("#characterDD").html(characterHTML);
+			GetIngredients(function (ingredients) {
+				DisplayMaterials("#ingredientsCP#ingredients", ingredients);
+			});
 		}, function(err) {
 			
 		});
@@ -267,40 +286,24 @@ function setProfitFilters() {
 					'">' + activeCharacter.crafting[i].discipline + '</option>');
 			}
 			$("#disciplineDD").html(disciplineHTML);
-			$("#debug").text(activeCharacter.recipes.length);
 		}, function(err) {
 			
 		});
 	}
 	if ((activeDiscipline == undefined) && (document.forms["craftingprofit"]["discipline"].value != "")) {
-		var character = makeRequest("GET", gwUrlBase + gwUrlCharacters + '/' +
-			document.forms["craftingprofit"]["characters"].value + gwUrlAuth + apikey);
-		character.then(function(result){
-			activeCharacter = JSON.parse(result.respone);
-			var disciplineHTML = "";
-			for(i=0; i<activeCharacter.crafting.length; i++) {
-				disciplineHTML = disciplineHTML.concat('<option value="' + activeCharacter.crafting[i].discipline +
-					'">' + activeCharacter.crafting[i].discipline + '</option>');
-			}
-			$("#disciplineDD").html(disciplineHTML);
-		}, function(err) {
-			
-		});
 	} else if (activeDiscipline == undefined) {
 	} else if (activeDiscipline != document.forms["craftingprofit"]["apikey"].value) {
-		var character = makeRequest("GET", gwUrlBase + gwUrlCharacters + '/' +
-			document.forms["craftingprofit"]["characters"].value + gwUrlAuth + apikey);
-		character.then(function(result){
-			activeCharacter = JSON.parse(result.respone);
-			var disciplineHTML = "";
-			for(i=0; i<activeCharacter.crafting.length; i++) {
-				disciplineHTML = disciplineHTML.concat('<option value="' + activeCharacter.crafting[i].discipline +
-					'">' + activeCharacter.crafting[i].discipline + '</option>');
-			}
-			$("#disciplineDD").html(disciplineHTML);
-		}, function(err) {
-			
-		});
+	}
+}
+
+function createPageRequests(idArray) {
+	var pageRequests = [];
+	for(i=0; i<idArray.length; i+=200) {
+		var currentRequest = gwUrlIds;
+		for(j=i; j<((i+200 < idArray.length) ? idArray.length : i+200); j++) {
+			currentRequest = currentRequest + j + ",";
+		}
+		pageRequests.push(currentRequest);
 	}
 }
 
