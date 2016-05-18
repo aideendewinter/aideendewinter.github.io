@@ -44,9 +44,11 @@ function swapElements(elm1, elm2) {
 // String constants for constructing GW API requests.
 var gwUrlBase = "https://api.guildwars2.com/v2/";
 var gwUrlPrices = "commerce/prices";
-var gwUrlItems = "items"
-var gwUrlCharacters = "characters"
-var gwUrlIds = "?ids="
+var gwUrlMatStorage = "account/materials";
+var gwUrlBank = "account/bank";
+var gwUrlItems = "items";
+var gwUrlCharacters = "characters";
+var gwUrlIds = "?ids=";
 var gwUrlPaging = "?page_size=200&page=";
 var gwUrlAuth = "?access_token=";
 
@@ -163,17 +165,71 @@ function loadPrices() {
 var getIngredients = loadIngredients();
 
 function loadIngredients() {
-  var allStorage = new Promise(function (resolve, reject) {
-  	var promises = [];
-    promises.push(makeRequest("GET", gwUrlBase + gwUrlMatStorage));
-    var allPromises = Promise.all(promises);
-    allPromises.then (function (results) {
-    	
-    });
+  var promises = [];
+  var mats = new Promise(function (resolve, reject) {
+  	var request = makeRequest("GET", gwUrlBase + gwUrlMatStorage);
+  	request.then(function (result) {
+  		var slots = JSON.parse(result.respone);
+  		slots = slots.filter(function (current) {
+  			return current != null;
+  		});
+  		var ids = slots.map(function(current) {
+  			return current.id;
+  		});
+  		getItems(ids).then(function (result) {
+  			items.filter(function(current){
+  				return current.type == "CraftingMaterial";
+  			});
+  			items.forEach(function(current) {
+  				current.count = slots.find(function(slot) {
+  					return slot.id == current.id;
+  				});
+  			});
+  			
+  			resolve (items);
+  		});
+  	});
   });
+  promises.push(mats);
+  var bank = new Promise(function (resolve, reject) {
+  	var request = makeRequest("GET", gwUrlBase + gwUrlBank);
+  	request.then(function (result) {
+  		var bankSlots = JSON.parse(result.respone);
+  		bankSlots = bankSlots.filter(function (current) {
+  			return current != null;
+  		});
+  		var ids = bankSlots.map(function(current) {
+  			return current.id;
+  		});
+  		getItems(ids).then(function (result) {
+  			items.filter(function(current){
+  				return current.type == "CraftingMaterial";
+  			});
+  			items.forEach(function(current) {
+  				current.count = bankSlots.find(function(slot) {
+  					return slot.id == current.id;
+  				});
+  			});
+  			
+  			resolve (items);
+  		});
+  	});
+  });
+  promises.push(bank);
+  var allPromises = Promise.all(promises);
   return function(callback) {
-    allStorage.then(callback);
+    allPromises.then(callback);
   };
+}
+
+function getItems(ids) {
+  var promises = [];
+  var pageRequests = createPageRequests(ids);
+  pageRequests.forEach(function(current) {
+  	promises.push(makeRequest("GET", gwUrlBase + gwUrlItems + current));
+  });
+  var allPromises = Promise.all(promises);
+  return allPromises;
 }
 
 function getItem(id, callback) {
@@ -254,7 +310,7 @@ function setProfitFilters() {
 			}
 			$("#characterDD").html(characterHTML);
 			GetIngredients(function (ingredients) {
-				DisplayMaterials("#ingredientsCP#ingredients", ingredients);
+				DisplayIngredients("#ingredientsCP#ingredients", ingredients);
 			});
 		}, function(err) {
 			
@@ -305,6 +361,7 @@ function createPageRequests(idArray) {
 		}
 		pageRequests.push(currentRequest);
 	}
+	return pageRequests;
 }
 
 function calculateSpread(currentValue) {
