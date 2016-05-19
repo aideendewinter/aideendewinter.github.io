@@ -127,6 +127,7 @@ function displayItem(item, boxId, tpData) {
 }
 
 function displayIngredients(selector, ingredients) {
+	ingredients = [].concat.apply([], ingredients);
 	var ingredientHTML = "";
 	ingredients.forEach(function(current) {
 		ingredientHTML = ingredientHTML.concat('<li><img alt="'
