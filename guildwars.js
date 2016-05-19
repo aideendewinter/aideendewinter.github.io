@@ -359,7 +359,7 @@ function createPageRequests(idArray) {
 	var pageRequests = [];
 	for(i=0; i<idArray.length; i+=200) {
 		var currentRequest = gwUrlIds;
-		for(j=i; j<((i+200 < idArray.length) ? idArray.length : i+200); j++) {
+		for(j=i; j<((idArray.length < i+200) ? idArray.length : i+200); j++) {
 			currentRequest = currentRequest + idArray[j] + ",";
 		}
 		pageRequests.push(currentRequest);
