@@ -126,6 +126,15 @@ function displayItem(item, boxId, tpData) {
   }
 }
 
+function displayIngredients(selector, ingredients) {
+	var ingredientHTML = "";
+	ingredients.forEach(function(current) {
+		ingredientHTML = ingredientHTML.concat('<li><img alt="'
+			+ current.name + '" src="' + current.icon +'"</img>' + current.count + '</li>'
+		);
+	});
+}
+
 var getPrices = loadPrices();
 
 function loadPrices() {
@@ -177,9 +186,6 @@ function loadIngredients() {
   			return current.id;
   		});
   		getItems(ids).then(function (result) {
-  			items.filter(function(current){
-  				return current.type == "CraftingMaterial";
-  			});
   			items.forEach(function(current) {
   				current.count = slots.find(function(slot) {
   					return slot.id == current.id;
