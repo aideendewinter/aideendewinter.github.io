@@ -176,7 +176,7 @@ var getIngredients = loadIngredients();
 function loadIngredients() {
   var promises = [];
   var mats = new Promise(function (resolve, reject) {
-  	var request = makeRequest("GET", gwUrlBase + gwUrlMatStorage);
+  	var request = makeRequest("GET", gwUrlBase + gwUrlMatStorage + gwUrlAuth + apikey);
   	request.then(function (result) {
   		var slots = JSON.parse(result.respone);
   		slots = slots.filter(function (current) {
@@ -198,7 +198,7 @@ function loadIngredients() {
   });
   promises.push(mats);
   var bank = new Promise(function (resolve, reject) {
-  	var request = makeRequest("GET", gwUrlBase + gwUrlBank);
+  	var request = makeRequest("GET", gwUrlBase + gwUrlBank + gwUrlAuth + apikey);
   	request.then(function (result) {
   		var bankSlots = JSON.parse(result.respone);
   		bankSlots = bankSlots.filter(function (current) {
@@ -315,8 +315,8 @@ function setProfitFilters() {
 					'">' + characterNames[i] + '</option>');
 			}
 			$("#characterDD").html(characterHTML);
-			GetIngredients(function (ingredients) {
-				DisplayIngredients("#ingredientsCP#ingredients", ingredients);
+			getIngredients(function (ingredients) {
+				displayIngredients("#ingredientsCP#ingredients", ingredients);
 			});
 		}, function(err) {
 			
