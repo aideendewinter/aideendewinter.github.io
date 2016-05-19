@@ -230,7 +230,7 @@ function getItems(ids) {
   var pageRequests = createPageRequests(ids);
   pageRequests.forEach(function(current) {
   	promises.push(new Promise(function (resolve, reject) {
-  		var request = makeRequest("GET", gwUrlBase + gwUrlItems + current));
+  		var request = makeRequest("GET", gwUrlBase + gwUrlItems + current);
   		request.then(function(result){
   			resolve(JSON.parse(result.respone));
   		});
