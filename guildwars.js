@@ -134,7 +134,7 @@ function displayIngredients(selector, ingredients) {
 			+ current.name + '" src="' + current.icon +'"</img>' + current.count + '</li>'
 		);
 	});
-	$(selector).html = ingredientHTML;
+	$(selector).html(ingredientHTML);
 }
 
 var getPrices = loadPrices();
