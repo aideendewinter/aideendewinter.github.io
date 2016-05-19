@@ -319,7 +319,7 @@ function setProfitFilters() {
 			}
 			$("#characterDD").html(characterHTML);
 			loadIngredients()(function (ingredients) {
-				displayIngredients("#ingredientsCP#ingredients", ingredients);
+				displayIngredients("#ingredientsCP #ingredients", ingredients);
 			});
 		}, function(err) {
 			
