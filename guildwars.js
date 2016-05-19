@@ -177,9 +177,6 @@ function loadIngredients() {
   	var request = makeRequest("GET", gwUrlBase + gwUrlMatStorage + gwUrlAuth + apikey);
   	request.then(function (result) {
   		var slots = JSON.parse(result.respone);
-  		slots = slots.filter(function (current) {
-  			return current != null;
-  		});
   		var ids = slots.map(function(current) {
   			return current.id;
   		});
@@ -188,7 +185,7 @@ function loadIngredients() {
   			items.forEach(function(current) {
   				current.count = slots.find(function(slot) {
   					return slot.id == current.id;
-  				});
+  				}).count;
   			});
   			
   			resolve (items);
@@ -214,7 +211,7 @@ function loadIngredients() {
   			items.forEach(function(current) {
   				current.count = bankSlots.find(function(slot) {
   					return slot.id == current.id;
-  				});
+  				}).count;
   			});
   			
   			resolve (items);
