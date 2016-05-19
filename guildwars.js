@@ -229,7 +229,12 @@ function getItems(ids) {
   var promises = [];
   var pageRequests = createPageRequests(ids);
   pageRequests.forEach(function(current) {
-  	promises.push(makeRequest("GET", gwUrlBase + gwUrlItems + current));
+  	promises.push(new Promise(function (resolve, reject) {
+  		var request = makeRequest("GET", gwUrlBase + gwUrlItems + current));
+  		request.then(function(result){
+  			resolve(JSON.parse(result.respone));
+  		});
+  	});
   });
   var allPromises = Promise.all(promises);
   return allPromises;
