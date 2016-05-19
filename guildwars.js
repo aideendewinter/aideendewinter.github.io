@@ -171,8 +171,6 @@ function loadPrices() {
   };
 }
 
-var getIngredients = loadIngredients();
-
 function loadIngredients() {
   var promises = [];
   var mats = new Promise(function (resolve, reject) {
@@ -315,7 +313,7 @@ function setProfitFilters() {
 					'">' + characterNames[i] + '</option>');
 			}
 			$("#characterDD").html(characterHTML);
-			getIngredients(function (ingredients) {
+			loadIngredients()(function (ingredients) {
 				displayIngredients("#ingredientsCP#ingredients", ingredients);
 			});
 		}, function(err) {
