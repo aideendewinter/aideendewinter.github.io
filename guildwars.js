@@ -184,6 +184,7 @@ function loadIngredients() {
   			return current.id;
   		});
   		getItems(ids).then(function (result) {
+  			var items = [].concat.apply([], result);
   			items.forEach(function(current) {
   				current.count = slots.find(function(slot) {
   					return slot.id == current.id;
@@ -206,6 +207,7 @@ function loadIngredients() {
   			return current.id;
   		});
   		getItems(ids).then(function (result) {
+  			var items = [].concat.apply([], result);
   			items.filter(function(current){
   				return current.type == "CraftingMaterial";
   			});
