@@ -234,7 +234,7 @@ function getItems(ids) {
   		request.then(function(result){
   			resolve(JSON.parse(result.respone));
   		});
-  	});
+  	}));
   });
   var allPromises = Promise.all(promises);
   return allPromises;
