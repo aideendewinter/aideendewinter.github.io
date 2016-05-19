@@ -358,9 +358,9 @@ function setProfitFilters() {
 function createPageRequests(idArray) {
 	var pageRequests = [];
 	for(i=0; i<idArray.length; i+=200) {
-		var currentRequest = gwUrlIds;
-		for(j=i; j<((idArray.length < i+200) ? idArray.length : i+200); j++) {
-			currentRequest = currentRequest + idArray[j] + ",";
+		var currentRequest = gwUrlIds + idArray[i];
+		for(j=i+1; j<((idArray.length < i+200) ? idArray.length : i+200); j++) {
+			currentRequest = currentRequest + "," + idArray[j];
 		}
 		pageRequests.push(currentRequest);
 	}
