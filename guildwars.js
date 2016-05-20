@@ -131,7 +131,7 @@ function displayIngredients(selector, ingredients) {
 	var ingredientHTML = "";
 	ingredients.forEach(function(current) {
 		ingredientHTML = ingredientHTML.concat('<li><img alt="'
-			+ current.name + '" src="' + current.icon +'"</img>' + current.count + '</li>'
+			+ current.name + '" src="' + current.icon +'"</img><span class="count">' + current.count + '</span></li>'
 		);
 	});
 	$(selector).html(ingredientHTML);
