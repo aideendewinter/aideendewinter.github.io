@@ -25,6 +25,21 @@ body {
     color: #FFFFFF;
     z-index: 10;
 }
+.navigation {
+    width: 100%;
+    margin: 8px 0px;
+    background: #4DC6D6;
+    text-align: left;
+}
+.navigation li {
+  display: inline-block;
+  padding: 16px 16px;
+}
+.navigation li:hover {
+  background: gray;
+  color: white;
+  cursor: pointer;
+}
 h1 {
     font-family: 'Kaushan Script', cursive;
     text-align: right;
