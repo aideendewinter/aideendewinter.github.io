@@ -116,3 +116,12 @@ form div * {
 form h2 {
   padding: 0;
 }
+#tpspread {
+  display: none;
+}
+#ingredientsCP li {
+  float: left;
+}
+#ingredientsCP img {
+  width: 64px;
+}
