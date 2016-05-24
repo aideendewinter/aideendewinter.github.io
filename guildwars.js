@@ -70,10 +70,10 @@ $(document).ready(function(){
 		$('#' + currentTool).removeClass('activeNav');
 		currentTool = $(this).attr('id');
 		$('#' + currentTool).addClass('activeNav');
-		if($(this).attr('id') == "spreadNav") {
+		if(currentTool == "spreadNav") {
 			$('#craftprofit').fadeOut();
 			$('#tpspread').fadeIn();
-		} else if ($(this).attr('id') == "craftingNav") {
+		} else if (currentTool == "craftingNav") {
 			$('#tpspread').fadeOut();
 			$('#craftprofit').fadeIn();
 		}
