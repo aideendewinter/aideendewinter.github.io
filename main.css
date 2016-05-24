@@ -143,6 +143,6 @@ form h2 {
   font-weight: bold;
   text-shadow: 2px 2px black;
 }
-.activeNav {
+.hidden {
   background: white;
 }
