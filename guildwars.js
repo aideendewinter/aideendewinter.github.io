@@ -64,7 +64,7 @@ $(document).ready(function(){
 	});
 	getPrices(displayGreatestSpread);
 	
-	$("menu").on("click", function(){
+	$(".menu").on("click", function(){
 		if($(this).attr('id') == currentTool)
 			return;
 		$('#' + currentTool).removeClass('activeNav');
