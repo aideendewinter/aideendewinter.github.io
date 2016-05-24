@@ -54,6 +54,7 @@ var gwUrlAuth = "?access_token=";
 
 // Current index of priceSpread item.
 var pS=0;
+var currentTool;
 // Entry to AJAX code.
 $(document).ready(function(){
 	// Fetch GW Price data and display two greatest spreads.
@@ -61,6 +62,18 @@ $(document).ready(function(){
     	evt.preventDefault();
 	});
 	getPrices(displayGreatestSpread);
+	
+	$("menu").on("click", function(){
+		if($(this) === currentTool)
+			return;
+		if($(this).attr('id') == "spreadNav") {
+			if (currentTool != null) {
+				
+			}
+		} else if ($(this).attr('id') == "craftingNav") {
+			
+		}
+	});
 	
 	// Allow navigation of prices.
 	$(".stack.next").on("click",function(){
