@@ -40,6 +40,17 @@ body {
   color: white;
   cursor: pointer;
 }
+.activeNav {
+  background: white;
+}
+li.activeNav:hover {
+  background: white;
+  color: black;
+  cursor: default;
+}
+#craftprofit {
+  display: block;
+}
 h1 {
     font-family: 'Kaushan Script', cursive;
     text-align: right;
@@ -142,7 +153,4 @@ form h2 {
   color: gold;
   font-weight: bold;
   text-shadow: 2px 2px black;
-}
-.activeNav {
-  background: white;
 }
