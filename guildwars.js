@@ -71,10 +71,10 @@ $(document).ready(function(){
 		currentTool = $(this).attr('id');
 		$('#' + currentTool).addClass('activeNav');
 		if(currentTool == "spreadNav") {
-			$('#craftprofit').fadeOut();
+			$('#craftprofit').css('display', '');
 			$('#tpspread').fadeIn();
 		} else if (currentTool == "craftingNav") {
-			$('#tpspread').fadeOut();
+			$('#tpspread').css('display', '');
 			$('#craftprofit').fadeIn();
 		}
 	});
