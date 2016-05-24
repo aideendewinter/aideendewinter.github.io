@@ -58,6 +58,7 @@ var currentTool;
 // Entry to AJAX code.
 $(document).ready(function(){
 	// Fetch GW Price data and display two greatest spreads.
+	$('#craftprofit').fadeIn();
 	$('#craftingprofit').submit(function (evt) {
     	evt.preventDefault();
 	});
@@ -66,12 +67,17 @@ $(document).ready(function(){
 	$("menu").on("click", function(){
 		if($(this) === currentTool)
 			return;
+		if (currentTool != null) {
+			currentTool.removeClass('activeNav');
+		}
+		currentTool = $(this);
+		currentTool.addClass('activeNav');
 		if($(this).attr('id') == "spreadNav") {
-			if (currentTool != null) {
-				
-			}
+			$('#craftprofit').fadeOut();
+			$('#tpspread').fadeIn();
 		} else if ($(this).attr('id') == "craftingNav") {
-			
+			$('#tpspread').fadeOut();
+			$('#craftprofit').fadeIn();
 		}
 	});
 	
