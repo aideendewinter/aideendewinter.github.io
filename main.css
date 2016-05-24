@@ -116,7 +116,7 @@ form div * {
 form h2 {
   padding: 0;
 }
-#tpspread {
+.hidden {
   display: none;
 }
 #ingredientsCP {
@@ -143,6 +143,6 @@ form h2 {
   font-weight: bold;
   text-shadow: 2px 2px black;
 }
-.hidden {
+.activeNav {
   background: white;
 }
