@@ -48,9 +48,6 @@ li.activeNav:hover {
   color: black;
   cursor: default;
 }
-#craftprofit {
-  display: block;
-}
 h1 {
     font-family: 'Kaushan Script', cursive;
     text-align: right;
