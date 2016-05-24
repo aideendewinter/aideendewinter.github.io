@@ -54,7 +54,7 @@ var gwUrlAuth = "?access_token=";
 
 // Current index of priceSpread item.
 var pS=0;
-var currentTool;
+var currentTool = 'craftingNav';
 // Entry to AJAX code.
 $(document).ready(function(){
 	// Fetch GW Price data and display two greatest spreads.
@@ -65,13 +65,11 @@ $(document).ready(function(){
 	getPrices(displayGreatestSpread);
 	
 	$("menu").on("click", function(){
-		if($(this) === currentTool)
+		if($(this).attr('id') == currentTool)
 			return;
-		if (currentTool != null) {
-			currentTool.removeClass('activeNav');
-		}
-		currentTool = $(this);
-		currentTool.addClass('activeNav');
+		$('#' + currentTool).removeClass('activeNav');
+		currentTool = $(this).attr('id');
+		$('#' + currentTool).addClass('activeNav');
 		if($(this).attr('id') == "spreadNav") {
 			$('#craftprofit').fadeOut();
 			$('#tpspread').fadeIn();
