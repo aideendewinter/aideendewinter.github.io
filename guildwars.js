@@ -58,7 +58,6 @@ var currentTool = 'craftingNav';
 // Entry to AJAX code.
 $(document).ready(function(){
 	// Fetch GW Price data and display two greatest spreads.
-	$('#craftprofit').fadeIn();
 	$('#craftingprofit').submit(function (evt) {
     	evt.preventDefault();
 	});
@@ -96,6 +95,7 @@ $(document).ready(function(){
 			bottom: targetHeight
 		}, stackBackwardReset);
 	});
+	$('#craftprofit').fadeIn();
 });
 
 function stackForwardReset() {
@@ -225,7 +225,7 @@ function loadIngredients() {
   		});
   		getItems(ids).then(function (result) {
   			var items = [].concat.apply([], result);
-  			items.filter(function(current){
+  			items = items.filter(function(current){
   				return current.type == "CraftingMaterial";
   			});
   			items.forEach(function(current) {
