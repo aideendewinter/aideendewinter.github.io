@@ -257,7 +257,7 @@ function loadIngredients() {
 			var charInvs = bags.map(function(current) {
 				return current.inventory;
 			});
-			var charInvs = [].concat.apply([], charInvs);
+			charInvs = [].concat.apply([], charInvs);
   			charInvs = charInvs.filter(function (current) {
   				return current != null;
   			});
