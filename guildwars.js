@@ -250,11 +250,14 @@ function loadIngredients() {
   		});
   		var allInventories = Promise.all(inventoryRequests);
   		allInventories.then(function(responses) {
-  			var bankSlots = JSON.parse(result.respone);
-  			bankSlots = bankSlots.filter(function (current) {
+  			var charInvs = [];
+			responses.forEach(function (current) {
+				charInvs = charInvs.concat((JSON.parse(current)).inventory);
+			});
+  			charInvs = charInvs.filter(function (current) {
   				return current != null;
   			});
-  			var ids = bankSlots.map(function(current) {
+  			var ids = charInvs.map(function(current) {
   				return current.id;
   			});
   			getItems(ids).then(function (result) {
@@ -263,7 +266,7 @@ function loadIngredients() {
   					return current.type == "CraftingMaterial";
   				});
   				items.forEach(function(current) {
-  					current.count = bankSlots.find(function(slot) {
+  					current.count = charInvs.find(function(slot) {
   						return slot.id == current.id;
   					}).count;
   				});
