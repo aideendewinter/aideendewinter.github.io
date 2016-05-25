@@ -163,14 +163,14 @@ function loadPrices() {
     firstPage.then(function(result){
 		if (result.pageCount > 1) {
 			var promises = [];
-			var priceData = JSON.parse(result.respone);
+			var priceData = JSON.parse(result.response);
 			for(i = 1; i < result.pageCount; i++) {
 				promises.push(makeRequest("GET", gwUrlBase + gwUrlPrices + gwUrlPaging + i));
 			}
 			var allPromises = Promise.all(promises);
 			allPromises.then(function(results) {
 				for(i = 0; i < results.length; i++) {
-					priceData = priceData.concat(JSON.parse(results[i].respone));
+					priceData = priceData.concat(JSON.parse(results[i].response));
 				}
 				priceData = priceData.filter(function(currentValue) {
 					return (currentValue != null);
@@ -180,7 +180,7 @@ function loadPrices() {
 				reject(e);
 			});
 		} else {
-			resolve(JSON.parse(result.respone));
+			resolve(JSON.parse(result.response));
 		}
     }, function(err) {
       reject(err);
@@ -196,7 +196,7 @@ function loadIngredients() {
   var mats = new Promise(function (resolve, reject) {
   	var request = makeRequest("GET", gwUrlBase + gwUrlMatStorage + gwUrlAuth + apikey);
   	request.then(function (result) {
-  		var slots = JSON.parse(result.respone);
+  		var slots = JSON.parse(result.response);
   		var ids = slots.map(function(current) {
   			return current.id;
   		});
@@ -216,7 +216,7 @@ function loadIngredients() {
   var bank = new Promise(function (resolve, reject) {
   	var request = makeRequest("GET", gwUrlBase + gwUrlBank + gwUrlAuth + apikey);
   	request.then(function (result) {
-  		var bankSlots = JSON.parse(result.respone);
+  		var bankSlots = JSON.parse(result.response);
   		bankSlots = bankSlots.filter(function (current) {
   			return current != null;
   		});
@@ -242,7 +242,7 @@ function loadIngredients() {
   var characters = new Promise(function (resolve, reject) {
   	var request = makeRequest("GET", gwUrlBase + gwUrlCharacters + gwUrlAuth + apikey);
   	request.then(function (result) {
-  		var characterNames = JSON.parse(result.respone);
+  		var characterNames = JSON.parse(result.response);
   		var inventoryRequests = [];
   		characterNames.forEach(function(current) {
   			inventoryRequests.push(makeRequest("GET", gwUrlBase + gwUrlCharacters + '/' +
@@ -294,7 +294,7 @@ function getItems(ids) {
   	promises.push(new Promise(function (resolve, reject) {
   		var request = makeRequest("GET", gwUrlBase + gwUrlItems + current);
   		request.then(function(result){
-  			resolve(JSON.parse(result.respone));
+  			resolve(JSON.parse(result.response));
   		});
   	}));
   });
@@ -375,7 +375,7 @@ function setProfitFilters() {
 		});
 		var characters = makeRequest("GET", gwUrlBase + gwUrlCharacters + gwUrlAuth + apikey);
 		characters.then(function(result){
-			var characterNames = JSON.parse(result.respone);
+			var characterNames = JSON.parse(result.response);
 			var characterHTML = "";
 			for(i=0; i<characterNames.length; i++) {
 				characterHTML = characterHTML.concat('<option value="' + encodeURIComponent(characterNames[i]) +
@@ -390,7 +390,7 @@ function setProfitFilters() {
 		var character = makeRequest("GET", gwUrlBase + gwUrlCharacters + '/' +
 			document.forms["craftingprofit"]["characters"].value + gwUrlAuth + apikey);
 		character.then(function(result){
-			activeCharacter = JSON.parse(result.respone);
+			activeCharacter = JSON.parse(result.response);
 			var disciplineHTML = "";
 			for(i=0; i<activeCharacter.crafting.length; i++) {
 				disciplineHTML = disciplineHTML.concat('<option value="' + activeCharacter.crafting[i].discipline +
@@ -405,7 +405,7 @@ function setProfitFilters() {
 		var character = makeRequest("GET", gwUrlBase + gwUrlCharacters + '/' +
 			document.forms["craftingprofit"]["characters"].value + gwUrlAuth + apikey);
 		character.then(function(result){
-			activeCharacter = JSON.parse(result.respone);
+			activeCharacter = JSON.parse(result.response);
 			var disciplineHTML = "";
 			for(i=0; i<activeCharacter.crafting.length; i++) {
 				disciplineHTML = disciplineHTML.concat('<option value="' + activeCharacter.crafting[i].discipline +
