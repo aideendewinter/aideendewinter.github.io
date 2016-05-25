@@ -239,6 +239,41 @@ function loadIngredients() {
   	});
   });
   promises.push(bank);
+  var characters = new Promise(function (resolve, reject) {
+  	var request = makeRequest("GET", gwUrlBase + gwUrlCharacters + gwUrlAuth + apikey);
+  	request.then(function (result) {
+  		var characterNames = JSON.parse(result.respone);
+  		var inventoryRequests = [];
+  		characterNames.forEach(function(current) {
+  			inventoryRequests.push(makeRequest("GET", gwUrlBase + gwUrlCharacters + '/' +
+				encodeURIComponent(current) + '/inventory' + gwUrlAuth + apikey));
+  		});
+  		var allInventories = Promise.all(inventoryRequests);
+  		allInventories.then(function(responses) {
+  			var bankSlots = JSON.parse(result.respone);
+  			bankSlots = bankSlots.filter(function (current) {
+  				return current != null;
+  			});
+  			var ids = bankSlots.map(function(current) {
+  				return current.id;
+  			});
+  			getItems(ids).then(function (result) {
+  				var items = [].concat.apply([], result);
+  				items = items.filter(function(current){
+  					return current.type == "CraftingMaterial";
+  				});
+  				items.forEach(function(current) {
+  					current.count = bankSlots.find(function(slot) {
+  						return slot.id == current.id;
+  					}).count;
+  				});
+  				
+  				resolve (items);
+  			});
+  		});
+  	});
+  });
+  promises.push(characters);
   var allPromises = Promise.all(promises);
   return function(callback) {
     allPromises.then(callback);
@@ -328,6 +363,9 @@ var activeDiscipline;
 function setProfitFilters() {
 	if (apikey != document.forms["craftingprofit"]["apikey"].value) {
 		apikey = document.forms["craftingprofit"]["apikey"].value;
+		loadIngredients()(function (ingredients) {
+			displayIngredients("#ingredientsCP #ingredients", ingredients);
+		});
 		var characters = makeRequest("GET", gwUrlBase + gwUrlCharacters + gwUrlAuth + apikey);
 		characters.then(function(result){
 			var characterNames = JSON.parse(result.respone);
@@ -337,9 +375,6 @@ function setProfitFilters() {
 					'">' + characterNames[i] + '</option>');
 			}
 			$("#characterDD").html(characterHTML);
-			loadIngredients()(function (ingredients) {
-				displayIngredients("#ingredientsCP #ingredients", ingredients);
-			});
 		}, function(err) {
 			
 		});
