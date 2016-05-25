@@ -269,13 +269,15 @@ function loadIngredients() {
   			});
   			getItems(ids).then(function (result) {
   				var items = [].concat.apply([], result);
+  				items = charInvs.map(function(current) {
+  					var item = items.find(function(slot) {
+  						return slot.id == current.id;
+  					});
+  					item.count = current.count;
+  					return item;
+  				});
   				items = items.filter(function(current){
   					return current.type == "CraftingMaterial";
-  				});
-  				items.forEach(function(current) {
-  					current.count = charInvs.find(function(slot) {
-  						return slot.id == current.id;
-  					}).count;
   				});
   				
   				resolve (items);
