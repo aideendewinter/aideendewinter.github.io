@@ -250,10 +250,14 @@ function loadIngredients() {
   		});
   		var allInventories = Promise.all(inventoryRequests);
   		allInventories.then(function(responses) {
-  			var charInvs = [];
+  			var bags = [];
 			responses.forEach(function (current) {
-				charInvs = charInvs.concat((JSON.parse(current)).inventory);
+				bags = bags.concat(JSON.parse(current));
 			});
+			var charInvs = bags.map(function(current) {
+				return current.inventory;
+			}):
+			var charInvs = [].concat.apply([], charInvs);
   			charInvs = charInvs.filter(function (current) {
   				return current != null;
   			});
