@@ -6,7 +6,7 @@ function makeRequest (method, url) {
 		xhr.onload = function () {
 			if (this.status >= 200 && this.status < 300) {
 				resolve({
-					respone: xhr.response,
+					response: xhr.response,
 					pageCount: ((xhr.getAllResponseHeaders().includes("X-Page-Total")) ? 
 						xhr.getResponseHeader("X-Page-Total") : 1)
 				});
