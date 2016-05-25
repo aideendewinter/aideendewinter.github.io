@@ -252,7 +252,7 @@ function loadIngredients() {
   		allInventories.then(function(responses) {
   			var bags = [];
 			responses.forEach(function (current) {
-				bags = bags.concat(JSON.parse(current));
+				bags = bags.concat(JSON.parse(current.response));
 			});
 			var charInvs = bags.map(function(current) {
 				return current.inventory;
