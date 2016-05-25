@@ -254,6 +254,9 @@ function loadIngredients() {
 			responses.forEach(function (current) {
 				bags = bags.concat((JSON.parse(current.response)).bags);
 			});
+  			bags = bags.filter(function (current) {
+  				return current != null;
+  			});
 			var charInvs = bags.map(function(current) {
 				return current.inventory;
 			});
