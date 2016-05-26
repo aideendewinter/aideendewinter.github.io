@@ -164,7 +164,7 @@ function displayIngredients(selector, ingredients) {
 		var matches = getAllIndices(ingredients, function(current) {
 			return current.id == ingredients[i].id;
 		});
-		for(j=matches.length-1; j>1; j--) {
+		for(j=matches.length-1; j>0; j--) {
 			ingredients[i].count += ingredients[matches[j]].count;
 			ingredients.splice(matches[j], 1);
 		}
