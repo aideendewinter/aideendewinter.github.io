@@ -51,7 +51,7 @@ function getAllIndices(arr, val) {
 function getAllIndices(arr, testFunction) {
     var indices = [], i;
     for(i = 0; i < arr.length; i++)
-        if (testFunction(arr[i], val))
+        if (testFunction(arr[i]))
             indices.push(i);
     return indices;
 }
@@ -161,8 +161,8 @@ function displayItem(item, boxId, tpData) {
 function displayIngredients(selector, ingredients) {
 	ingredients = [].concat.apply([], ingredients);
 	for(i=0; i<ingredients.length; i++) {
-		var matches = getAllIndices(ingredients, function(val1, val2) {
-			return val1.id == val2.id;
+		var matches = getAllIndices(ingredients, function(current) {
+			return current.id == ingredients[i].id;
 		});
 		for(j=matches.length-1; j>1; j--) {
 			ingredients[i].count += ingredients[matches[j]].count;
