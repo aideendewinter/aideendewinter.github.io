@@ -283,6 +283,7 @@ function loadIngredients() {
   					var item = items.find(function(slot) {
   						return slot.id == current.id;
   					});
+					item = jQuery.extend({}, item);
   					item.count = current.count;
   					return item;
   				});
