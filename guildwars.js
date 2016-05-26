@@ -39,7 +39,22 @@ function swapElements(elm1, elm2) {
     parent1.insertBefore(elm2, next1);
     parent2.insertBefore(elm1, next2);
 }
-
+// http://stackoverflow.com/questions/20798477/how-to-find-index-of-all-occurrences-of-element-in-array
+function getAllIndices(arr, val) {
+    var indices = [], i;
+    for(i = 0; i < arr.length; i++)
+        if (arr[i] === val)
+            indices.push(i);
+    return indices;
+}
+// Expanded by Jess Whitworth for complex matching.
+function getAllIndices(arr, testFunction) {
+    var indices = [], i;
+    for(i = 0; i < arr.length; i++)
+        if (testFunction(arr[i], val))
+            indices.push(i);
+    return indices;
+}
 // My code.
 // String constants for constructing GW API requests.
 var gwUrlBase = "https://api.guildwars2.com/v2/";
@@ -145,6 +160,15 @@ function displayItem(item, boxId, tpData) {
 
 function displayIngredients(selector, ingredients) {
 	ingredients = [].concat.apply([], ingredients);
+	for(i=0; i<ingredients.length; i++) {
+		var matches = getAllIndices(ingredients, function(val1, val2) {
+			return val1.id == val2.id;
+		});
+		for(j=matches.length-1; j>1; j--) {
+			ingredients[i].count += ingredients[matches[j]].count;
+			ingredients.splice(matches[j], 1);
+		}
+	}
 	var ingredientHTML = "";
 	ingredients.forEach(function(current) {
 		ingredientHTML = ingredientHTML.concat('<li name="' + current.id + '"><img alt="'
