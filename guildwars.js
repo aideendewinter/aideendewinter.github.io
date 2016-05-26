@@ -147,12 +147,22 @@ function displayIngredients(selector, ingredients) {
 	ingredients = [].concat.apply([], ingredients);
 	var ingredientHTML = "";
 	ingredients.forEach(function(current) {
-		ingredientHTML = ingredientHTML.concat('<li><img alt="'
+		ingredientHTML = ingredientHTML.concat('<li name="' + current.id + '"><img alt="'
 			+ current.name + '" title="' + current.name + '" src="' + current.icon
 			+ '"</img><span class="count">' + current.count + '</span></li>'
 		);
 	});
 	$(selector).html(ingredientHTML);
+	$(selector + " li").on("click", function() {
+		displayCraftProfitCalc(selector, $(this).attr("name"));
+	});
+}
+
+function displayCraftProfitCalc(selector, itemId) {
+	getItem(itemId, function(item) {
+		$(selector).after('<div id="craft-profit-calc"><h2>' + item.name + ' Profit Sheet</h2>'
+		+ '</div>');
+	});
 }
 
 var getPrices = loadPrices();
@@ -307,6 +317,7 @@ function getItems(ids) {
   return allPromises;
 }
 
+// Needs to be converted to promise.
 function getItem(id, callback) {
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function() {
