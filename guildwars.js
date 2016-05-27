@@ -180,10 +180,10 @@ function displayIngredients(selector, ingredients) {
 }
 
 function displayCraftProfitCalc(selector, itemId, prices, ingredients) {
-	var price = prices.find(function(current) {
-		return current.id == item.id;
-	});
 	var item = ingredients.find(function(current) {
+		return current.id == itemId;
+	});
+	var price = prices.find(function(current) {
 		return current.id == item.id;
 	});
 	
