@@ -419,7 +419,7 @@ function setProfitFilters() {
 				ingredients = [].concat.apply([], ingredients);
 				displayIngredients("#ingredientsCP #ingredients", ingredients);
 				$("#ingredientsCP #ingredients li").on("click", function() {
-					displayCraftProfitCalc("#ingredientsCP #ingredients", $(this).attr("name"), prices, ingredients);
+					displayCraftProfitCalc("#ingredientsCP", $(this).attr("name"), prices, ingredients);
 				});
 			});
 		});
