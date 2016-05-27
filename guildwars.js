@@ -411,7 +411,7 @@ var activeDiscipline;
 function setProfitFilters() {
 	if (apikey != document.forms["craftingprofit"]["apikey"].value) {
 		apikey = document.forms["craftingprofit"]["apikey"].value;
-		getPrices().then(function(prices) {
+		getPrices(function(prices) {
 			loadIngredients()(function (ingredients) {
 				displayIngredients("#ingredientsCP #ingredients", ingredients);
 				$(selector + " li").on("click", function() {
