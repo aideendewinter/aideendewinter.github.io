@@ -181,10 +181,12 @@ function displayIngredients(selector, ingredients) {
 
 function displayCraftProfitCalc(selector, itemId, prices) {
 	getItem(itemId, function(item) {
-		//var price = prices
+		var price = prices.find(function(current) {
+			return current.id == item.id;
+		}
 		
 		$(selector).after('<div id="craft-profit-calc"><h2>' + item.name + ' Profit Sheet</h2>'
-		+ 
+		+ ''
 		+ '</div>');
 	});
 }
