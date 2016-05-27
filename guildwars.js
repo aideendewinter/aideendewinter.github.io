@@ -159,7 +159,6 @@ function displayItem(item, boxId, tpData) {
 }
 
 function displayIngredients(selector, ingredients) {
-	ingredients = [].concat.apply([], ingredients);
 	for(i=0; i<ingredients.length; i++) {
 		var matches = getAllIndices(ingredients, function(current) {
 			return current.id == ingredients[i].id;
@@ -417,6 +416,7 @@ function setProfitFilters() {
 		apikey = document.forms["craftingprofit"]["apikey"].value;
 		getPrices(function(prices) {
 			loadIngredients()(function (ingredients) {
+				ingredients = [].concat.apply([], ingredients);
 				displayIngredients("#ingredientsCP #ingredients", ingredients);
 				$("#ingredientsCP #ingredients li").on("click", function() {
 					displayCraftProfitCalc("#ingredientsCP #ingredients", $(this).attr("name"), prices, ingredients);
