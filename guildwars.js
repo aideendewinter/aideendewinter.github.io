@@ -414,7 +414,7 @@ function setProfitFilters() {
 		getPrices(function(prices) {
 			loadIngredients()(function (ingredients) {
 				displayIngredients("#ingredientsCP #ingredients", ingredients);
-				$(selector + " li").on("click", function() {
+				$("#ingredientsCP #ingredients li").on("click", function() {
 					displayCraftProfitCalc(selector, $(this).attr("name"), prices);
 				});
 			});
