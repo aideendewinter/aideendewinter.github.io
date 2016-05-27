@@ -177,14 +177,14 @@ function displayIngredients(selector, ingredients) {
 		);
 	});
 	$(selector).html(ingredientHTML);
-	$(selector + " li").on("click", function() {
-		displayCraftProfitCalc(selector, $(this).attr("name"));
-	});
 }
 
-function displayCraftProfitCalc(selector, itemId) {
+function displayCraftProfitCalc(selector, itemId, prices) {
 	getItem(itemId, function(item) {
+		//var price = prices
+		
 		$(selector).after('<div id="craft-profit-calc"><h2>' + item.name + ' Profit Sheet</h2>'
+		+ 
 		+ '</div>');
 	});
 }
@@ -411,8 +411,13 @@ var activeDiscipline;
 function setProfitFilters() {
 	if (apikey != document.forms["craftingprofit"]["apikey"].value) {
 		apikey = document.forms["craftingprofit"]["apikey"].value;
-		loadIngredients()(function (ingredients) {
-			displayIngredients("#ingredientsCP #ingredients", ingredients);
+		getPrices().then(function(prices)) {
+			loadIngredients()(function (ingredients) {
+				displayIngredients("#ingredientsCP #ingredients", ingredients);
+				$(selector + " li").on("click", function() {
+					displayCraftProfitCalc(selector, $(this).attr("name"), prices);
+				});
+			});
 		});
 		var characters = makeRequest("GET", gwUrlBase + gwUrlCharacters + gwUrlAuth + apikey);
 		characters.then(function(result){
