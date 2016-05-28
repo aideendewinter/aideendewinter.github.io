@@ -153,8 +153,9 @@ function displayItem(item, boxId, tpData) {
   $(boxId + " .item-icon").attr("src", item.icon);
   $(boxId + " .item-icon").attr("alt", item.name + "'s Icon");
   if (tpData !== undefined) {
-	$(boxId + " .buy-price").text(tpData.buys.unit_price);
-	$(boxId + " .sell-price").text(tpData.sells.unit_price);
+	$(boxId + " .buy-price").text(displayGold(tpData.buys.unit_price));
+	$(boxId + " .sell-price").text(displayGold(tpData.sells.unit_price));
+	$(boxId + " .sell-price").after("<li>Spread</li>" )
   }
 }
 
@@ -187,10 +188,17 @@ function displayCraftProfitCalc(selector, itemId, prices, ingredients) {
 	});
 	
 	$(selector).after('<div id="craft-profit-calc"><h2>' + item.name + ' Profit Sheet</h2>'
-	+ '<ul><li>Sell Instantly: ' + (price.buys.unit_price * .85 * item.count) + '</li>'
-	+ '<li>List on TP: ' + (price.sells.unit_price * .85 * item.count) + '</li>'
+	+ '<ul><li>Sell Instantly: ' + displayGold(price.buys.unit_price * .85 * item.count) + '</li>'
+	+ '<li>List on TP: ' + displayGold(price.sells.unit_price * .85 * item.count) + '</li>'
 	+ '</ul>'
 	+ '</div>');
+}
+
+function displayGold(amount) {
+	var gold = amount / 10000;
+	var silver = (amount / 100) - (gold * 100);
+	var copper = (amount) - (gold * 10000) - (silver * 100)
+	return (gold + "G " + silver + "S " + copper + "C");
 }
 
 var getPrices = loadPrices();
