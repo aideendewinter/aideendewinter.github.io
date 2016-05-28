@@ -95,6 +95,8 @@ $(document).ready(function(){
 	
 	// Allow navigation of prices.
 	$(".stack.next").on("click",function(){
+		if (pS == 0)
+			return;
 		$(".stack.current").fadeOut();
 		$(this).css("z-index", "1");
 		$(this).animate({
@@ -103,6 +105,7 @@ $(document).ready(function(){
 		}, stackForwardReset);
 	});
 	$(".stack.current").on("click",function(){
+		
 		$(".stack.next").fadeOut();
 		var targetHeight = (60 - $(".stack.next").innerHeight()) + "px";
 		$(this).animate({
@@ -188,10 +191,14 @@ function displayCraftProfitCalc(selector, itemId, prices, ingredients) {
 	});
 	
 	$(selector).after('<div id="craft-profit-calc"><h2>' + item.name + ' Profit Sheet</h2>'
-	+ '<ul><li>Sell Instantly: ' + displayGold(price.buys.unit_price * .85 * item.count) + '</li>'
-	+ '<li>List on TP: ' + displayGold(price.sells.unit_price * .85 * item.count) + '</li>'
+	+ '<ul><li>Sell Instantly: ' + displayGold((price.buys.unit_price - tpFees(price.buys.unit_price)) * item.count) + '</li>'
+	+ '<li>List on TP: ' + displayGold((price.sells.unit_price - tpFees(price.sells.unit_price)) * item.count) + '</li>'
 	+ '</ul>'
 	+ '</div>');
+}
+
+function tpFees(amount) {
+	return Math.max(1, Math.floor(amount * .1)) + Math.max(1, Math.floor(amount *.05));
 }
 
 function displayGold(amount) {
