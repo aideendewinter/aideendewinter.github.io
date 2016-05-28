@@ -95,8 +95,6 @@ $(document).ready(function(){
 	
 	// Allow navigation of prices.
 	$(".stack.next").on("click",function(){
-		if (pS == 0)
-			return;
 		$(".stack.current").fadeOut();
 		$(this).css("z-index", "1");
 		$(this).animate({
@@ -105,7 +103,8 @@ $(document).ready(function(){
 		}, stackForwardReset);
 	});
 	$(".stack.current").on("click",function(){
-		
+		if (pS == 0)
+			return;
 		$(".stack.next").fadeOut();
 		var targetHeight = (60 - $(".stack.next").innerHeight()) + "px";
 		$(this).animate({
