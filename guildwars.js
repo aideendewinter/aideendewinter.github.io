@@ -188,6 +188,7 @@ function displayCraftProfitCalc(selector, itemId, prices, ingredients) {
 	
 	$(selector).after('<div id="craft-profit-calc"><h2>' + item.name + ' Profit Sheet</h2>'
 	+ '<ul><li>Sell Instantly: ' + (price.buys.unit_price * .85 * item.count) + '</li>'
+	+ '<li>List on TP: ' + (price.sells.unit_price * .85 * item.count) + '</li>'
 	+ '</ul>'
 	+ '</div>');
 }
