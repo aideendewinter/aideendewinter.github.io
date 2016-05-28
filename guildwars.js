@@ -195,8 +195,8 @@ function displayCraftProfitCalc(selector, itemId, prices, ingredients) {
 }
 
 function displayGold(amount) {
-	var gold = floor(amount / 10000);
-	var silver = floor((amount / 100) - (gold * 100));
+	var gold = Math.floor(amount / 10000);
+	var silver = Math.floor((amount / 100) - (gold * 100));
 	var copper = (amount) - (gold * 10000) - (silver * 100)
 	return (gold + "G " + silver + "S " + copper + "C");
 }
