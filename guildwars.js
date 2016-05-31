@@ -72,7 +72,7 @@ var pS=0;
 var currentTool = 'craftingNav';
 // Entry to AJAX code.
 $(document).ready(function(){
-	$('#content').load('gw2tools.html', function() {
+	$('.content').load('gw2tools.html', function() {
 		$('#craftingprofit').submit(function (evt) {
 	    	evt.preventDefault();
 		});
