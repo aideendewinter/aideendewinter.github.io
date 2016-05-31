@@ -58,61 +58,62 @@ function getAllIndices(arr, testFunction) {
 // My code.
 // String constants for constructing GW API requests.
 var gwUrlBase = "https://api.guildwars2.com/v2/";
+var gwUrlAuth = "?access_token=";
+var gwUrlPaging = "?page_size=200&page=";
+var gwUrlIds = "?ids=";
 var gwUrlPrices = "commerce/prices";
 var gwUrlMatStorage = "account/materials";
 var gwUrlBank = "account/bank";
 var gwUrlItems = "items";
 var gwUrlCharacters = "characters";
-var gwUrlIds = "?ids=";
-var gwUrlPaging = "?page_size=200&page=";
-var gwUrlAuth = "?access_token=";
 
 // Current index of priceSpread item.
 var pS=0;
 var currentTool = 'craftingNav';
 // Entry to AJAX code.
 $(document).ready(function(){
-	// Fetch GW Price data and display two greatest spreads.
-	$('#craftingprofit').submit(function (evt) {
-    	evt.preventDefault();
+	$('#content').load('gw2tools.html', function() {
+		$('#craftingprofit').submit(function (evt) {
+	    	evt.preventDefault();
+		});
+		// Fetch GW Price data and display two greatest spreads.
+		getPrices(displayGreatestSpread);
+		
+		$(".menu").on("click", function(){
+			if($(this).attr('id') == currentTool)
+				return;
+			$('#' + currentTool).removeClass('activeNav');
+			currentTool = $(this).attr('id');
+			$('#' + currentTool).addClass('activeNav');
+			if(currentTool == "spreadNav") {
+				$('#craftprofit').css('display', '');
+				$('#tpspread').fadeIn();
+			} else if (currentTool == "craftingNav") {
+				$('#tpspread').css('display', '');
+				$('#craftprofit').fadeIn();
+			}
+		});
+		// Allow navigation of prices.
+		$(".stack.next").on("click",function(){
+			$(".stack.current").fadeOut();
+			$(this).css("z-index", "1");
+			$(this).animate({
+				left: '0',
+				bottom: $(".stack.current").innerHeight()
+			}, stackForwardReset);
+		});
+		$(".stack.current").on("click",function(){
+			if (pS == 0)
+				return;
+			$(".stack.next").fadeOut();
+			var targetHeight = (60 - $(".stack.next").innerHeight()) + "px";
+			$(this).animate({
+				left: '75px',
+				bottom: targetHeight
+			}, stackBackwardReset);
+		});
+		$('#craftprofit').fadeIn();
 	});
-	getPrices(displayGreatestSpread);
-	
-	$(".menu").on("click", function(){
-		if($(this).attr('id') == currentTool)
-			return;
-		$('#' + currentTool).removeClass('activeNav');
-		currentTool = $(this).attr('id');
-		$('#' + currentTool).addClass('activeNav');
-		if(currentTool == "spreadNav") {
-			$('#craftprofit').css('display', '');
-			$('#tpspread').fadeIn();
-		} else if (currentTool == "craftingNav") {
-			$('#tpspread').css('display', '');
-			$('#craftprofit').fadeIn();
-		}
-	});
-	
-	// Allow navigation of prices.
-	$(".stack.next").on("click",function(){
-		$(".stack.current").fadeOut();
-		$(this).css("z-index", "1");
-		$(this).animate({
-			left: '0',
-			bottom: $(".stack.current").innerHeight()
-		}, stackForwardReset);
-	});
-	$(".stack.current").on("click",function(){
-		if (pS == 0)
-			return;
-		$(".stack.next").fadeOut();
-		var targetHeight = (60 - $(".stack.next").innerHeight()) + "px";
-		$(this).animate({
-			left: '75px',
-			bottom: targetHeight
-		}, stackBackwardReset);
-	});
-	$('#craftprofit').fadeIn();
 });
 
 function stackForwardReset() {
