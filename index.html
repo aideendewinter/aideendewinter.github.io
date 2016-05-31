@@ -1,102 +1,25 @@
 <!DOCTYPE html>
 <html lang="en-US">
-  <title>GW2 Tips and Tools</title>
-  <meta name="description" content="Guild Wars 2 calculators, tools, tips and guides.">
-  <meta name="author" content="Jess Whitworth">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="reset.css">
-  <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" type="text/css" href="main.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-  <script src="guildwars.js"></script>
-  <script>
-  </script>
-  <body>
-    <div class="page">
-      <div class="header">
-        <h1>GW2 Tips and Tools</h1>
-      </div>
-      <div class="content">
-      <h1>Guild Wars Tips</h1>
-	  <p>Rich Iron Ore Run: [&amp;BGMAAAA=][&amp;BAQAAAA=][&amp;BBIAAAA=][&amp;BKsAAAA=][&amp;BJMBAAA=]
-	  [&amp;BFEGAAA=][&amp;BL8AAAA=][&amp;BF0CAAA=][&amp;BF4BAAA=][&amp;BP0BAAA=][&amp;BEsBAAA=]</p>
-      <h1>Guild Wars Tools</h1>
-      <ul class="navigation">
-      	<li class="menu" id="spreadNav">Trading Post Spread
-      	</li><li class="menu activeNav" id="craftingNav">Crafting Profit</li>
-      </ul>
-        <div id="tpspread" class="hidden">
-        <h2>Guild Wars TP Spread</h2>
-        <form id="spreadfilters" oninput="setSpreadFilters()">
-          <h2>Filters</h2>
-          <div>
-            Max Spread
-            <input type="number" name="goldmax" value="3000">Gold</input>
-            <input type="number" name="silvermax" value="0">Silver</input>
-          </div>
-          <div>
-            Min Spread
-            <input type="number" name="goldmin" value="0">Gold</input>
-            <input type="number" name="silvermin" value="0">Silver</input>
-          </div>
-          <div>
-            Max Buy
-            <input type="number" name="goldmaxbuy" value="30000">Gold</input>
-            <input type="number" name="silvermaxbuy" value="0">Silver</input>
-          </div>
-        </form>
-        <div class="info item stack current" id="current-item">
-          <h3 class="item-name"></h3>
-          <img src="#" alt="" class="item-icon"/>
-          <dl>
-            <dt>Buy Price</dt>
-            <dd class="buy-price"></dd>
-            <dt>Sell Price</dt>
-            <dd class="sell-price"></dd>
-          </dl>
-        </div>
-        <div class="info item stack next" id="next-item">
-          <h3 class="item-name"></h3>
-          <img src="#" alt="" class="item-icon"/>
-          <dl>
-            <dt>Buy Price</dt>
-            <dd class="buy-price"></dd>
-            <dt>Sell Price</dt>
-            <dd class="sell-price"></dd>
-          </dl>
-        </div>
-        </div>
-        <div id="craftprofit" class="hidden">
-        <h2>Guild Wars Crafting Profit</h2>
-        <form id="craftingprofit" onsubmit="setProfitFilters()">
-          <h2>Account &amp; Discipline Selection</h2>
-          <input type="submit" value="Update">
-          <div>
-            API Key
-            <input type="text" name="apikey">API Key</input>
-          </div>
-          <div>
-            Character
-            <select name="characters" id="characterDD">
-            </select>
-          </div>
-          <div>
-            Discipline
-            <select name="discipline" id="disciplineDD">
-            </select>
-          </div>
-        </form>
-        <div>
-        	<h3>Crafting Ingredients</h3>
-        	<div id="ingredientsCP">
-        		<ul id="ingredients">
-        		</ul>
-        	</div>
-        </div>
-        </div>
-        <p id="debug"></p>
-      </div>
-    </div>
-  </body>
+	<title>GW2 Tips and Tools</title>
+	<meta name="description" content="Guild Wars 2 calculators, tools, tips and guides.">
+	<meta name="author" content="Jess Whitworth">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="reset.css">
+	<link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script src="guildwars.js"></script>
+	<script>
+	</script>
+	<body>
+		<div class="page">
+			<div class="header">
+				<h1>GW2 Tips and Tools</h1>
+			</div>
+			<div class="content">
+				<p id="debug"></p>
+			</div>
+		</div>
+	</body>
 </html>
