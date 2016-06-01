@@ -138,27 +138,31 @@ function stackBackwardReset() {
 
 // 
 function displayGreatestSpread(priceSpread) {
-  priceSpread = priceSpread.filter(function(currentValue) {
-  	return ((currentValue.buys.quantity !== 0) && (currentValue.sells.quantity !== 0));
-  });
-  priceSpread.forEach(calculateSpread);
-  priceSpread.sort(comparePrices);
-  getItem(priceSpread[0].id, function(item) {
-	  displayItem(item, "#current-item", priceSpread[0]);
-  });
-  getItem(priceSpread[1].id, function(item) {
-	  displayItem(item, "#next-item", priceSpread[1]);
+	priceSpread = priceSpread.filter(function(currentValue) {
+		return ((currentValue.buys.quantity !== 0) && (currentValue.sells.quantity !== 0));
+	});
+	priceSpread.forEach(calculateSpread);
+	priceSpread.sort(comparePrices);
+	getItem(priceSpread[0].id, function(item) {
+		
+		displayItem(item, "#current-item");
+		$("#current-item .buy-price").text(displayGold(tpData.buys.unit_price));
+		$("#current-item .sell-price").text(displayGold(tpData.sells.unit_price));
+		$("#current-item .sell-price").after("<dt>Spread</dt>");
+	});
+	getItem(priceSpread[1].id, function(item) {
+  		displayItem(item, "#next-item");
+		$("#next-item .buy-price").text(displayGold(tpData.buys.unit_price));
+		$("#next-item .sell-price").text(displayGold(tpData.sells.unit_price));
+		$("#next-item .sell-price").after("<dt>Spread</dt>");
   });
 }
 
-function displayItem(item, boxId, tpData) {
+function displayItem(item, boxId) {
   $(boxId + " .item-name").text(item.name);
   $(boxId + " .item-icon").attr("src", item.icon);
   $(boxId + " .item-icon").attr("alt", item.name + "'s Icon");
   if (tpData !== undefined) {
-	$(boxId + " .buy-price").text(displayGold(tpData.buys.unit_price));
-	$(boxId + " .sell-price").text(displayGold(tpData.sells.unit_price));
-	$(boxId + " .sell-price").after("<li>Spread</li>" )
   }
 }
 
