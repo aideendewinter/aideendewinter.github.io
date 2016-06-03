@@ -35,25 +35,6 @@ $(document).ready(function(){
 				$('#craftprofit').fadeIn();
 			}
 		});
-		// Allow navigation of prices.
-		$(".stack.next").on("click",function(){
-			$(".stack.current").fadeOut();
-			$(this).css("z-index", "1");
-			$(this).animate({
-				left: '0',
-				bottom: $(".stack.current").innerHeight()
-			}, stackForwardReset);
-		});
-		$(".stack.current").on("click",function(){
-			if (pS == 0)
-				return;
-			$(".stack.next").fadeOut();
-			var targetHeight = (60 - $(".stack.next").innerHeight()) + "px";
-			$(this).animate({
-				left: '75px',
-				bottom: targetHeight
-			}, stackBackwardReset);
-		});
 		$('#craftprofit').fadeIn();
 	});
 });
@@ -88,14 +69,14 @@ function displayGreatestSpread(priceSpread) {
 	
 	for(i=0; i < Math.min(3, priceSpread.length); i++) {
 		$.ajax({url: "/templates/stackitem.html", success: function(result){
-			var id = '"stackitem' + pad(i, 2) + '"';
+			var id = 'stackitem' + pad(i, 2) + '';
 			result = result.replace('{item-id}', id);
         	$("#spreaditems").append(result);
 			getItem(priceSpread[i].id, function(item) {
-				displayItem(item, id);
-				$(id + " .buy-price").text(displayGold(priceSpread[i].buys.unit_price));
-				$(id + " .sell-price").text(displayGold(priceSpread[i].sells.unit_price));
-				$(id + " .sell-price").after("<dt>Spread</dt>");
+				displayItem(item, "#" + id);
+				$("#" + id + " .buy-price").text(displayGold(priceSpread[i].buys.unit_price));
+				$("#" + id + " .sell-price").text(displayGold(priceSpread[i].sells.unit_price));
+				$("#" + id + " .sell-price").after("<dt>Spread</dt>");
 			});
     	}});
 	}
