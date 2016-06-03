@@ -88,14 +88,14 @@ function displayGreatestSpread(priceSpread) {
 	getItem(priceSpread[0].id, function(item) {
 		
 		displayItem(item, "#current-item");
-		$("#current-item .buy-price").text(displayGold(tpData.buys.unit_price));
-		$("#current-item .sell-price").text(displayGold(tpData.sells.unit_price));
+		$("#current-item .buy-price").text(displayGold(priceSpread[0].buys.unit_price));
+		$("#current-item .sell-price").text(displayGold(priceSpread[0].sells.unit_price));
 		$("#current-item .sell-price").after("<dt>Spread</dt>");
 	});
 	getItem(priceSpread[1].id, function(item) {
   		displayItem(item, "#next-item");
-		$("#next-item .buy-price").text(displayGold(tpData.buys.unit_price));
-		$("#next-item .sell-price").text(displayGold(tpData.sells.unit_price));
+		$("#next-item .buy-price").text(displayGold(priceSpread[1].buys.unit_price));
+		$("#next-item .sell-price").text(displayGold(priceSpread[1].sells.unit_price));
 		$("#next-item .sell-price").after("<dt>Spread</dt>");
   });
 }
