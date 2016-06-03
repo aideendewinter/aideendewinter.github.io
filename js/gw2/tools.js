@@ -104,8 +104,6 @@ function displayItem(item, boxId) {
   $(boxId + " .item-name").text(item.name);
   $(boxId + " .item-icon").attr("src", item.icon);
   $(boxId + " .item-icon").attr("alt", item.name + "'s Icon");
-  if (tpData !== undefined) {
-  }
 }
 
 function displayIngredients(selector, ingredients) {
