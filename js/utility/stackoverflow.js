@@ -55,3 +55,9 @@ function getAllIndices(arr, testFunction) {
             indices.push(i);
     return indices;
 }
+// http://stackoverflow.com/questions/2998784/how-to-output-integers-with-leading-zeros-in-javascript
+function pad(num, size) {
+	var s = num+"";
+	while (s.length < size) s = "0" + s;
+	return s;
+}
