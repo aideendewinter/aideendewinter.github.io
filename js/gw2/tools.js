@@ -14,7 +14,7 @@ var pS=0;
 var currentTool = 'craftingNav';
 // Entry to AJAX code.
 $(document).ready(function(){
-	$('.content').load('gw2tools.html', function() {
+	$('.content').load('/templates/gw2/tools.html', function() {
 		$('#craftingprofit').submit(function (evt) {
 	    	evt.preventDefault();
 		});
@@ -85,19 +85,20 @@ function displayGreatestSpread(priceSpread) {
 	});
 	priceSpread.forEach(calculateSpread);
 	priceSpread.sort(comparePrices);
-	getItem(priceSpread[0].id, function(item) {
-		
-		displayItem(item, "#current-item");
-		$("#current-item .buy-price").text(displayGold(priceSpread[0].buys.unit_price));
-		$("#current-item .sell-price").text(displayGold(priceSpread[0].sells.unit_price));
-		$("#current-item .sell-price").after("<dt>Spread</dt>");
-	});
-	getItem(priceSpread[1].id, function(item) {
-  		displayItem(item, "#next-item");
-		$("#next-item .buy-price").text(displayGold(priceSpread[1].buys.unit_price));
-		$("#next-item .sell-price").text(displayGold(priceSpread[1].sells.unit_price));
-		$("#next-item .sell-price").after("<dt>Spread</dt>");
-  });
+	
+	for(i=0; i < Math.min(3, priceSpread.length); i++) {
+		$.ajax({url: "/templates/stackitem.html", success: function(result){
+			var id = '"stackitem' + pad(i, 2) + '"';
+			result = result.replace('{item-id}', id);
+        	$("#spreaditems").append(result);
+			getItem(priceSpread[i].id, function(item) {
+				displayItem(item, id);
+				$(id + " .buy-price").text(displayGold(priceSpread[i].buys.unit_price));
+				$(id + " .sell-price").text(displayGold(priceSpread[i].sells.unit_price));
+				$(id + " .sell-price").after("<dt>Spread</dt>");
+			});
+    	}});
+	}
 }
 
 function displayItem(item, boxId) {
