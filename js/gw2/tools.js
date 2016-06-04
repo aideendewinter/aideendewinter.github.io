@@ -307,11 +307,8 @@ function getItem(id, callback) {
   xmlhttp.send();
 }
 
-function setSpreadFilters(pSIndex) {
-	if (pSIndex === undefined) {
-		pS = 0;
-		pSIndex = 0;
-	}
+var profitFilters = new Object();
+function setSpreadFilters() {
     var goldMax = document.forms["spreadfilters"]["goldmax"].value;
     var silverMax = document.forms["spreadfilters"]["silvermax"].value;
     var goldMin = document.forms["spreadfilters"]["goldmin"].value;
@@ -319,42 +316,26 @@ function setSpreadFilters(pSIndex) {
     var goldMaxBuy = document.forms["spreadfilters"]["goldmaxbuy"].value;
     var silverMaxBuy = document.forms["spreadfilters"]["silvermaxbuy"].value;
     
-    var max = (goldMax * 10000 + silverMax * 100);
-    var min = (goldMin * 10000 + silverMin * 100);
-    var maxBuy = (goldMaxBuy * 10000 + silverMaxBuy * 100)
-    
     if (goldMax == 0 && silverMax == 0) {
     	document.forms["spreadfilters"]["silvermax"].value = 1;
     	silverMax = 1;
-    	max = (goldMax * 10000 + silverMax * 100);
     }
     if (max < min) {
     	document.forms["spreadfilters"]["goldmax"].value = goldMin;
     	document.forms["spreadfilters"]["silvermax"].value = silverMin;
     	goldMax = goldMin;
     	silverMax = silverMin;
-    	max = (goldMax * 10000 + silverMax * 100);
     }
     
-    getPrices(function(priceSpread) {
-    	var filteredSpread = priceSpread.filter(function(currentValue) {
-    		return ((currentValue.spread <= max) && (currentValue.spread >= min) &&
-    		(currentValue.buys.unit_price <= maxBuy));
-    	});
-    	filteredSpread.sort(comparePrices);
-    	getItem(filteredSpread[pSIndex].id, function(item) {
-    		displayItem(item, "#current-item", filteredSpread[pSIndex]);
-			if ($('.stack.current').css("opacity") < 1) {
-				$('.stack.current').css("opacity", '');
-				$('.stack.current').hide();
-			}
-    		$('.stack.current').fadeIn();
-    	});
-    	getItem(filteredSpread[pSIndex+1].id, function(item) {
-    		displayItem(item, "#next-item", filteredSpread[pSIndex+1]);
-    		$('.stack.next').fadeIn();
-    	});	
-    });
+    profitFilters.max = (goldMax * 10000 + silverMax * 100);
+    profitFilters.min = (goldMin * 10000 + silverMin * 100);
+    profitFilters.maxBuy = (goldMaxBuy * 10000 + silverMaxBuy * 100);
+    
+    getPrices(displayGreatestSpread);
+}
+
+function applySpreadFilters(priceSpread) {
+	
 }
 
 var apikey;
