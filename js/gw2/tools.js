@@ -82,7 +82,10 @@ function getDisplayItemWithSpread(boxId, price) {
 		displayItem(item, boxId);
 		$(boxId + " .buy-price").text(displayGold(price.buys.unit_price));
 		$(boxId + " .sell-price").text(displayGold(price.sells.unit_price));
-		$(boxId + " .sell-price").after("<dt>Spread</dt>");
+		$(boxId + " .sell-price").after("<br /><dt>Spread</dt><dd>"
+			+ displayGold(price.spread) + "</dd><dt>Trading Post Fees</dt><dd>"
+			+ displayGold(tpFees(price.sells.unit_price)) + "</dd><dt>Trade Profit</dt><dd>"
+			+ displayGold(price.sells.unit_price - tpFees(price.sells.unit_price)) + "</dd>");
 	}
 }
 
