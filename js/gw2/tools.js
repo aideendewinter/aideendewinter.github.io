@@ -67,19 +67,19 @@ function displayGreatestSpread(priceSpread) {
 	priceSpread.forEach(calculateSpread);
 	priceSpread.sort(comparePrices);
 	
-	for(i=0; i < Math.min(3, priceSpread.length); i++) {
-		$.ajax({url: "/templates/stackitem.html", success: function(result){
+	$.ajax({url: "/templates/stackitem.html", success: function(result){
+		for(i=0; i < Math.min(3, priceSpread.length); i++) {	
 			var id = 'stackitem' + pad(i, 2) + '';
-			result = result.replace('{item-id}', id);
-        	$("#spreaditems").append(result);
+			var itemHTML = result.replace('{item-id}', id);
+        	$("#spreaditems").append(itemHTML);
 			getItem(priceSpread[i].id, function(item) {
 				displayItem(item, "#" + id);
 				$("#" + id + " .buy-price").text(displayGold(priceSpread[i].buys.unit_price));
 				$("#" + id + " .sell-price").text(displayGold(priceSpread[i].sells.unit_price));
 				$("#" + id + " .sell-price").after("<dt>Spread</dt>");
 			});
-    	}});
-	}
+		}
+    }});
 }
 
 function displayItem(item, boxId) {
