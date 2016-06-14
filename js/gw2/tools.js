@@ -19,7 +19,9 @@ $(document).ready(function(){
 	    	evt.preventDefault();
 		});
 		// Fetch GW Price data and display two greatest spreads.
-		getPrices(displayGreatestSpread);
+		getPrices(function(priceSpread) {
+    		displayGreatestSpread(applySpreadFilters(pricesSpread));
+    	});
 		
 		$(".menu").on("click", function(){
 			if($(this).attr('id') == currentTool)
@@ -311,11 +313,14 @@ function setSpreadFilters() {
     profitFilters.min = (goldMin * 10000 + silverMin * 100);
     profitFilters.maxBuy = (goldMaxBuy * 10000 + silverMaxBuy * 100);
     
-    getPrices(displayGreatestSpread);
+    getPrices(function(priceSpread) {
+    	displayGreatestSpread(applySpreadFilters(pricesSpread));
+    });
 }
 
 function applySpreadFilters(priceSpread) {
-	
+	// Apply filters.
+	return priceSpread;
 }
 
 var apikey;
