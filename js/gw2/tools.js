@@ -39,26 +39,6 @@ $(document).ready(function(){
 	});
 });
 
-function stackForwardReset() {
-	$('.stack.current').html($('.stack.next').html());
-	$('.stack.current').show();
-	$('.stack.next').hide();
-	$('.stack.next').css("z-index", '');
-	$('.stack.next').css("left", '');
-	$('.stack.next').css("bottom", '');
-	pS++;
-	setSpreadFilters(pS);
-}
-function stackBackwardReset() {
-	$('.stack.next').html($('.stack.current').html());
-	$('.stack.next').show();
-	$('.stack.current').css("opacity", '.01');
-	$('.stack.current').css("left", '');
-	$('.stack.current').css("bottom", '');
-	pS--;
-	setSpreadFilters(pS);
-}
-
 // 
 function displayGreatestSpread(priceSpread) {
 	priceSpread = priceSpread.filter(function(currentValue) {
