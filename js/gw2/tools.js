@@ -19,9 +19,7 @@ $(document).ready(function(){
 	    	evt.preventDefault();
 		});
 		// Fetch GW Price data and display two greatest spreads.
-		getPrices(function(priceSpread) {
-    		displayGreatestSpread(applySpreadFilters(pricesSpread));
-    	});
+		setSpreadFilters();
 		
 		$(".menu").on("click", function(){
 			if($(this).attr('id') == currentTool)
