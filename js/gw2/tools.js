@@ -300,7 +300,7 @@ function setSpreadFilters() {
     	document.forms["spreadfilters"]["silvermax"].value = 1;
     	silverMax = 1;
     }
-    if (max < min) {
+    if ((goldMax * 10000 + silverMax * 100) < (goldMin * 10000 + silverMin * 100)) {
     	document.forms["spreadfilters"]["goldmax"].value = goldMin;
     	document.forms["spreadfilters"]["silvermax"].value = silverMin;
     	goldMax = goldMin;
